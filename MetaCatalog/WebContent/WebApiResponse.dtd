@@ -1,0 +1,8 @@
+<!ELEMENT response (requesttype,status,date,dataformat,message,data)>
+<!ATTLIST response version CDATA #REQUIRED>
+<!ELEMENT requesttype (#PCDATA)>
+<!ELEMENT status (#PCDATA)>
+<!ELEMENT date (#PCDATA)>
+<!ELEMENT dataformat (#PCDATA)>
+<!ELEMENT message (#PCDATA)>
+<!ELEMENT data (#PCDATA)>

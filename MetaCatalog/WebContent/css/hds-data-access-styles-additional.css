@@ -1,0 +1,21 @@
+#headerBox div.leftTab {
+  position: absolute;
+	left: 10px;
+	z-index: 10;
+	float: right;
+	width: 117px;
+	height: 38px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	color: #777;
+	background-image: url(../images/create-dir-select.png);
+	background-position: 0px -50px;
+	background-repeat: no-repeat;
+	-moz-border-radius: 3px; 
+	cursor: pointer;
+}
+#headerBox div.leftTab.selected {
+  background-position: 0px 0px;
+	color: #fff;
+}

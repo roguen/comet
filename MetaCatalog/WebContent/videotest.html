@@ -1,0 +1,54 @@
+<html>
+	<body>
+		<br> 
+		<table border=1>
+			<tr>
+				<td>&nbsp;</td>
+				<td>Via COMET</td>
+				<td>Via HCP</td>
+			</tr>
+			<tr>
+				<td>embedded html5 video</td>
+				<td><video id="video_comet" width="320" height="240" controls>
+<!--					<source src="http://cometdev.domain.com/MetaCatalog/Relay?path=/NASA/HathawayMovie.m4v&type=object&cached&stream" type="video/x-m4v"></source> -->
+<!--					<source src="http://cometdev.domain.com/MetaCatalog/FileServlet?path=/tmp/METACATALOG/HathawayMovie.m4v" type="video/x-m4v"></source> -->
+
+					<source src="http://cometdev.domain.com/MetaCatalog/Relay?path=/NASA/HathawayMovie.m4v&type=object&cached" type="video/x-m4v"></source>
+
+
+				</video></td>
+				<td><video id="video_hcp" width="320" height="240" controls>
+					<source src="http://data.comet.hcp.domain.com/rest/NASA/HathawayMovie.m4v?redirect=false" type="video/x-m4v"></source>
+				</video></td>
+				<td>Only works for HCP</td>
+			</tr>
+			<tr>
+				<td>embedded html5 video (webm)</td>
+				<td><video id="video_comet" width="320" height="240" controls>
+<!--					<source src="http://cometdev.domain.com/MetaCatalog/Relay?path=/NASA/HathawayMovie.m4v&type=object&cached&stream" type="video/x-m4v"></source> -->
+<!--					<source src="http://cometdev.domain.com/MetaCatalog/FileServlet?path=/tmp/METACATALOG/HathawayMovie.m4v" type="video/x-m4v"></source> -->
+
+					<source src="http://cometdev.domain.com/MetaCatalog/Relay?path=/NASA/HathawayMovie.m4v&type=object&cached&webm" type="video/webm"></source>
+
+
+				</video></td>
+				<td><video id="video_hcp" width="320" height="240" controls>
+					<source src="http://data.comet.hcp.domain.com/rest/NASA/HathawayMovie.webm?redirect=false" type="video/webm"></source>
+				</video></td>
+				<td>Only works for HCP</td>
+			</tr>
+			<tr>
+				<td>downloadable link</td>
+				<td><a href="http://cometdev.domain.com/MetaCatalog/Relay?path=/NASA/HathawayMovie.m4v&type=object&cached">link</a></td>
+				<td><a href="http://data.comet.hcp.domain.com/rest/NASA/HathawayMovie.m4v?redirect=false">link</a></td>
+				<td>Works as expected</td>
+			</tr>
+			<tr>
+				<td>image file</td>
+				<td><img src="http://cometdev.domain.com/MetaCatalog/Relay?path=/NASA/HathawayMovie.m4v&type=thumbnail" /></td>
+				<td><img src="http://data.comet.hcp.domain.com/rest/NASA/HathawayMovie.m4v.thumb.png?redirect=false" /></td>
+				<td>Works as expected</td>
+			</tr>
+		</table>
+	</body>
+</html>

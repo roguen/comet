@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<project name="ROOT" basedir="." default="create_war">
+	<property name="src.dir" value="src"/>
+	<property name="web.dir" value="./WebContent"/>
+	<property name="war.dir" value="./"/>
+	<property name="classes.dir" value="${web.dir}/WEB-INF/classes"/>
+    	
+	<property name="lib.dir"     value="${web.dir}/WEB-INF/lib"/>
+	
+	<path id="classpath">
+        	<fileset dir="/opt/COMETDist/libs" includes="**/*.jar"/>
+	       	
+	</path>
+	
+	<target name="clean">
+        	<delete dir="${classes.dir}"/>
+	</target>
+
+	<target name="compile">
+        	<mkdir dir="${classes.dir}"/>
+        	<javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" debug="true"/>
+    	</target>
+
+ 	<target name="create_war" depends="clean,compile">
+        	<war destfile="${war.dir}/${ant.project.name}.war" webxml="${web.dir}/WEB-INF/web.xml">
+		<fileset dir="${web.dir}">
+      			<include name="**/*.*"/>
+			<exclude name=".svn" />
+			
+		</fileset>
+        	</war>
+	</target> 
+</project>

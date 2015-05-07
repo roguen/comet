@@ -1,0 +1,45 @@
+<!-- 
+//Copyright (c) 2015 Hitachi Data Systems, Inc.
+//All Rights Reserved.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License"); you may
+//   not use this file except in compliance with the License. You may obtain
+//   a copy of the License at
+//
+//         http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+//   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+//   License for the specific language governing permissions and limitations
+//   under the License.
+//
+//Package: COMET Web Application
+//Author: Chris Delezenski <chris.delezenski@hdsfed.com>
+//Compilation Date: 2015-05-06
+//License: Apache License, Version 2.0
+//Version: 1.21.0
+//(RPM) Release: 1
+//SVN: r554
+-->
+
+<h2>Word Cloud</h2>
+<table>
+	<tr>
+		<td style="width: 600px">
+			<input class="span7" name="wc_file_path" id="wc_file_path" type="text" style="width: 600px" placeholder="/path/somefile.wc" />
+		</td>
+		<td>
+			<button class="btn" id="wc_pull_btn" onmousedown="CometControlsPullWCFromHCPBTN()">Load</button>
+		</td>
+		<td>
+			<button class="btn" id="revert_word_cloud_btn" onmousedown="CometControlsWordCloudUpBTN()">Up</button> <br />
+		</td>
+	</tr>
+	<tr>
+		<td colspan=3 style="width: 650px; height:550px;" align=center>			
+			<div id="myCanvasContainer"><canvas width="650" height="550" id="myCanvas"></canvas></div>
+			<div id="tags"></div>
+		</td>
+	</tr>
+</table> 					

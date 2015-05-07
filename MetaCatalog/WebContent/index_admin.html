@@ -1,0 +1,413 @@
+<!-- 
+//Copyright (c) 2015 Hitachi Data Systems, Inc.
+//All Rights Reserved.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License"); you may
+//   not use this file except in compliance with the License. You may obtain
+//   a copy of the License at
+//
+//         http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+//   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+//   License for the specific language governing permissions and limitations
+//   under the License.
+//
+//Package: COMET Web Application
+//Author: Chris Delezenski <chris.delezenski@hdsfed.com>
+//Compilation Date: 2015-05-06
+//License: Apache License, Version 2.0
+//Version: 1.21.0
+//(RPM) Release: 1
+//SVN: r554
+-->
+
+<h2>Admin: <span id="migration_src_admin">loading...</span></h2>
+
+<div id="ADMIN_wrapper">
+
+	<div id="ADMIN_tabContainer" style="height: 670px;">
+		<div class="tabs">
+			<ul>
+			    <li id="ADMIN_tabHeader_1">Logs</li>
+			    <li id="ADMIN_tabHeader_2">Services</li>
+			    <li id="ADMIN_tabHeader_3">Configuration</li>
+			    <li id="ADMIN_tabHeader_4">Roles</li>
+			    <li id="ADMIN_tabHeader_5">Terminal</li>
+			    <li id="ADMIN_tabHeader_6">Editor</li>
+			    <li id="ADMIN_tabHeader_7">Upgrade</li>
+			</ul>
+		</div>
+		<!-- tabs -->
+	
+		<div class="tabcontent"> <!-- tab content for ADMIN -->
+			<div class="tabpage" id="ADMIN_tabpage_1">
+			<BR>
+			<h2>Logs</h2>
+			<BR>
+			<input type="button" onmousedown="CometRefreshLogs()" value="Reload Logs" />
+			
+			
+			<!-- new set of tabs for logs within admin tab -->
+			<div id="LOG_wrapper">
+				<div id="LOG_tabContainer" >
+					<div class="tabs">
+						<ul>
+							<li id="LOG_tabHeader_1">GUI Log</li>
+							<li id="LOG_tabHeader_2">Ingestor Log</li>
+							<li id="LOG_tabHeader_3">/etc/hosts</li>
+							<li id="LOG_tabHeader_4">Syslog</li>
+							<li id="LOG_tabHeader_5">/etc/fstab</li>
+						</ul>
+					</div>
+					<!-- tabs -->
+						
+					<div class="tabcontent"> <!-- tab content for logs -->
+						<div class="tabpage" id="LOG_tabpage_1" align="left">
+							<br>
+							<button type="button" onclick="OpenBrowserTab('Relay','logs','gui');">GUI Log Download</button><br>
+							<textarea id="gui_log_content" readonly name="gui_log_content" rows="28" cols="88" style="width:780px; height:450px; white-space:nowrap overflow:auto" wrap="off"></textarea>
+						</div>
+						<!-- end of tab page 1  (GUI Log) -->
+							
+							
+							
+						<div class="tabpage" id="LOG_tabpage_2">
+							<br>
+							<button type="button" onclick="OpenBrowserTab('Relay','logs','ingest');">Ingestor Log Download</button><br>
+							<textarea id="ingestor_log_content" readonly name="ingestor_log_content" rows="28" cols="88" style="width:780px; height:450px; white-space:nowrap  overflow:auto" wrap="off" ></textarea>
+						</div>
+						<!-- end of tab page 2  (Ingestor Log) -->
+						
+						
+						<div class="tabpage" id="LOG_tabpage_3">
+							<br>
+							<button type="button" onclick="OpenBrowserTab('Relay','logs','hosts');">/etc/hosts Download</button><br>
+							<textarea id="host_file_content" readonly name="host_file_content" rows="28" cols="88" style="width:780px; height:450px; white-space:nowrap overflow:auto" wrap="off" ></textarea>
+						</div>
+						<!-- end of tab page 3  (/etc/hosts) -->
+
+						<div class="tabpage" id="LOG_tabpage_4">
+							<br>
+							<button type="button" onclick="OpenBrowserTab('Relay','logs','syslog');">Syslog Download</button><br>
+							<textarea id="syslog_content" readonly name="syslog_content" rows="28" cols="88" style="width:780px; height:450px; white-space:nowrap overflow:auto" wrap="off" ></textarea>
+						</div>
+						<div class="tabpage" id="LOG_tabpage_5">
+							<br>
+							<button type="button" onclick="OpenBrowserTab('Relay','logs','fstab');">/etc/fstab Download</button><br>
+							<textarea id="fstab_content" readonly name="fstab_content" rows="28" cols="88" style="width:780px; height:450px; white-space:nowrap overflow:auto" wrap="off" ></textarea>
+						</div>
+						<!-- end of tab page 4  (Syslog Output) -->
+					</div>
+					<!-- end of LOG tabcontent -->
+				</div>
+				<!-- end LOG_tabContainer -->										
+			</div>
+			<!-- end LOG_wrapper -->										
+			</div>
+			<!-- end ADMIN_tabpage_1 (logs) -->
+			
+			<div class="tabpage" id="ADMIN_tabpage_2" align=left>
+			<div id="services_wrapper">
+			<BR>
+			<table>
+							    <tr>
+								<td colspan=3>
+   
+       <h2>Services</h2>
+       </td>
+       </tr>
+
+       <tr>
+       <td>											
+	       <button id="stop_comet_service_btn" type="button" onclick="CometControlsAdmin('stop','admin_status_message')">Stop Comet Service</button>
+       </td>
+       <td>
+	       <button id="start_comet_service_btn"  type="button" onclick="CometControlsAdmin('start','admin_status_message')">Start Comet Service</button>
+       </td>
+       </tr>
+
+
+       <tr>
+       <td>
+	       <button type="button" onclick="CometControlsAdmin('status','admin_status_message')">Check Status of Comet Service</button>
+	</td>
+	<td>
+	       <!-- <button type="button" onclick="CometControlsAdmin('upgrade','admin_status_message')" disabled>Upgrade Comet via HCP</button> -->
+		<button type="button" onclick="CometControlsAdmin('configcheck','admin_status_message')">Check Configuration</button>
+	</td>
+     	</tr>
+
+	<tr>
+	<td>
+	<button type="button" onclick="CometControlsAdmin('backup','admin_status_message')">Backup Configuration to HCP</button>
+	</td>
+	<td>
+	<button type="button" onclick="CometControlsAdmin('restore','admin_status_message')">Restore Configuration from HCP</button>
+	</td>
+	
+	
+	</tr>
+
+	<tr>
+	<td>
+	<button type="button" onclick="CometControlsAdmin('hcpcheck','admin_status_message')">Check HCP Status</button>
+	</td>
+	<td>
+	<button type="button" onclick="CometControlsAdmin('mountcheck','admin_status_message')">Check File System Status</button>
+	</td>
+	</tr>
+
+
+	<tr>
+	<td>
+	<button type="button" onclick="CometControlsAdmin('memory','admin_status_message')">Check Memory Status</button>
+	</td>
+	<td>
+	<button type="button" onclick="CometControlsAdmin('uptime','admin_status_message')">Check Load Average Status</button>
+	</td>
+	</tr>
+
+	<tr>
+	<td>
+	<button type="button" onclick="CometControlsAdmin('rpm','admin_status_message')">Check Package Status</button>
+	</td>
+	<td>
+	<button type="button" onclick="CometControlsAdmin('ingeststarttime','admin_status_message')">Ingest Start Time</button>
+	</td>
+	
+	<tr>
+	<td colspan=2>
+	<button type="button" onclick="CometControlsAdminClear('admin_status_message')">Clear Messages</button>
+	</td>
+	</tr>
+
+	<tr>
+	<td colspan=2>
+	<textarea id="admin_status_message" readonly name="admin_status_message" style="width:780px; height:350px; white-space:nowrap overflow:auto" wrap="off"></textarea>
+	</td>
+	</tr>
+	</table>
+							<!-- end of table -->
+						</div>
+						<!--end of wrapper-->	
+							
+			</div>
+			<!-- end of ADMIN tab page 2 (services) -->						
+			
+			<div class="tabpage" id="ADMIN_tabpage_3">
+				<BR>
+				<h2>Configuration</h2>
+				<BR>
+				<table>
+							    <tr>
+			<td colspan=3>/opt/COMETDist/comet.properties</td>
+			</tr>
+			<tr>
+			<td colspan=3>
+<textarea id="configuration_file" name="configuration_file" rows="32" cols="88"  style="width:780px; height:350px; white-space:nowrap overflow:auto" wrap="off"></textarea>
+			</td>
+			</tr>
+			<tr>
+			<td><button type="button" onclick="CometControlsLoadConfigurationFile()">Load</button></td><td colspan=2><button id="save_config_file_btn" type="button" onclick="CometControlsSaveConfigurationFile()">Save</button></td>
+			</tr>
+			</table>
+			
+			
+			</div>
+			<!-- end of ADMIN tab page 3 (Configuration) -->						
+
+
+
+
+
+
+
+			<div class="tabpage" id="ADMIN_tabpage_4" >
+				<BR>
+				<h2>Roles</h2>
+				<BR>
+				<table>
+							    <tr>
+			<td colspan=3>/opt/COMETDist/roles.json</td>
+			</tr>
+			<tr>
+			<td colspan=3>
+<textarea id="roles_file" name="roles_file" rows="32" cols="88"  style="width:780px; height:350px; white-space:nowrap overflow:auto" wrap="off"></textarea>
+			</td>
+			</tr>
+			<tr>
+			<td><button type="button" onclick="CometControlsLoadRolesFile()">Load</button></td><td colspan=2><button id="save_role_file_btn" type="button" onclick="CometControlsSaveRolesFile()">Save</button></td>
+			</tr>
+			</table>
+			
+			
+			</div>
+			<!-- end of ADMIN tab page 4 (Roles) -->						
+
+
+
+
+
+
+
+
+			<div class="tabpage" id="ADMIN_tabpage_5">
+				<BR>
+				<h2>Terminal</h2>
+				<BR>
+				
+				<div id="admin_terminal"></div>
+				
+				
+				
+			
+			
+			
+			</div>
+			<!-- end of ADMIN tab page 5 (Terminal) -->						
+
+
+
+
+
+			<div class="tabpage" id="ADMIN_tabpage_6">
+				<BR>
+				<h2>Edit Local File</h2>
+				<BR>
+				<table>
+							    <tr>
+			<td colspan=3>File Path: <input id="edit_file_path" placeholder="/path/to/file" type=text readonly /></td>
+			</tr>
+			<tr>
+			<td colspan=3>
+<textarea id="editable_file" name="editable_file" rows="32" cols="88" style="width:700px; height:500px; white-space:nowrap overflow:auto" wrap="off"></textarea>
+			</td>
+			</tr>
+			<tr>
+			<td><button type="button" onclick="CometAdmin_LoadFile_inEditor()">Reload</button></td><td colspan=2><button type="button" onclick="CometAdmin_SaveFile_inEditor()">Save</button></td>
+			</tr>
+			</table>
+			
+			
+			</div>
+			<!-- end of ADMIN tab page 7 (Upgrade) -->						
+
+			<div class="tabpage" id="ADMIN_tabpage_7" >
+				<BR>
+				<h3>Upload updates directly to HCP</h3>
+				<BR>
+				
+				 <!-- upload -->
+				
+		
+				
+		<!--		<div id="upgrade_via_url_upload_drop">
+					<h4 class="ui-widget-header ui-corner-all"  style="width:200">Select URL:</h4>
+				</div>
+				<div class="toggler">
+					<div id="upgrade_via_url_upload_content" class="ui-widget-content ui-corner-all" style="display: block; width: 200;">
+					
+					<input type="text" size="60" name="upgradeUrl" id="upgradeUrl">
+					<input type="text" size="60" name="saveAs" id="upgrade_via_url_saveas" value="COMETSelfInstaller.bin">
+					<button onclick="CometControlsUpoadFileViaURL_btn()" value="Upload">Upload</button>
+					 
+					</div>
+				</div>
+					
+					
+				<div id="upgrade_via_file_upload_drop">
+					<h4 class="ui-widget-header ui-corner-all"  style="width:200">Select Local File:</h4>
+				</div>
+				<div class="toggler"> 
+					<div id="upgrade_via_file_upload_content" class="ui-widget-content ui-corner-all" style="display: none; width: 200;">-->
+					
+					
+					<div id="upgrade_container">
+				<!-- this form works.. now try and get the other forms to work -->
+						<form id="upgradeForm" action="UploadUpgrade" method="post" enctype="multipart/form-data">
+							<input type="file" size="60" name="upgradeFile" id="upgradeFile">
+							<input type="submit" value="Upload">
+						</form> 
+				
+						
+						<div id="upgradeProgress" class=uploadProgress>
+				        		<div id="upgradeBar" class="uploadBar"></div>
+       							<div id="upgradePercent" class="uploadPercent">0%</div >
+						</div>
+					</div>
+					
+					
+					
+	<!--				</div> end drop_content -->
+		<!--		</div> end toggler -->
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			<!--	
+				<div id="upgrade_container">
+				
+					<form id="upgradeForm" action="UploadUpgrade" method="post" enctype="multipart/form-data">
+						<input type="file" size="60" name="upgradeFile" id="upgradeFile">
+						<input type="submit" value="Upload">
+					</form> 
+				
+						
+					<div id="upgradeProgress" class=uploadProgress>
+				        	<div id="upgradeBar" class="uploadBar"></div>
+       						<div id="upgradePercent" class="uploadPercent">0%</div >
+					</div>
+				</div> -->
+				
+				
+				
+				
+				<!-- end of uploader container -->
+				<br /><hr />
+				
+				<table><tr><td>
+				<button onclick="CometAdmin_LoadJSONIntoUpgradeTable()" >Refresh Table</button>
+				</td><td><button type="button" onclick="CometControlsAdmin('upgrade_rpm','upgrade_status_message')">Apply RPMs via HCP</button></td>
+				</td><td><button type="button" onclick="CometControlsAdmin('upgrade_bin','upgrade_status_message')">Upgrade Comet via HCP</button></td></tr></table>
+
+				<br />
+
+				<table border=2><tr>
+					<th style="width:500px">Package Name</th>
+					<th>Action</th>
+					<th>Archive</th>
+				</tr><tbody id="upgrade_content_tbody"></tbody></table>
+
+				<table>
+
+			<td>
+	<button type="button" onclick="CometControlsAdminClear('upgrade_status_message')">Clear Messages</button>
+	</td><td></td>
+	</tr>
+
+	<tr>
+	<td colspan=2>
+	<textarea id="upgrade_status_message" readonly name="upgrade_status_message" style="width:700px; height:200px; white-space:nowrap overflow:auto" wrap="off"></textarea>
+	</td>
+	</tr>
+	</table>
+			
+			</div>
+			<!-- end of ADMIN tab page 7 (Upgrade) -->						
+
+
+		</div>
+		<!-- end ADMIN tabcontent -->
+	</div>
+	<!-- end of ADMIN tabContainer -->						
+
+</div>
+<!-- end of admin_wrapper -->

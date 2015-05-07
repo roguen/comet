@@ -1,0 +1,66 @@
+
+
+<!--  BEGIN ADMIN-LOG-SNIPPET -->
+<div class="tabpage" id="RHS_tabpage_8">
+	<h2>Logs</h2>
+	<input type="button" onmousedown="CometRefreshLogs()" value="Reload Logs" />
+	<div id="LOG_tabContainer" style="height: 770px;">
+		<div class="tabs">
+      			<ul>
+				<li id="LOG_tabHeader_1">GUI Log</li>
+				<li id="LOG_tabHeader_2">Ingestor Log</li>
+				<li id="LOG_tabHeader_3">Ingestor Output</li>
+				<li id="LOG_tabHeader_4">Syslog</li>
+				<li id="LOG_tabHeader_5">Configuration File</li>
+			</ul> 
+		</div> <!-- tabs -->
+
+		<div class="tabpage" id="LOG_tabpage_1">
+			
+			<table>
+			<tr>
+			<td>
+			<button type="button" onclick="window.open('Relay?type=logs&annotation=gui');">GUI Log Download</button>
+			</td></tr><tr><td>
+			<textarea id="gui_log_content" readonly name="gui_log_content" rows="42" cols="88"></textarea>
+			</td>
+			</tr>
+			</table>
+		</div> <!-- end of tab page 1  (GUI Log) -->	
+		<div class="tabpage" id="LOG_tabpage_2">
+			<table>
+			<tr>
+			<td>
+			<button type="button" onclick="window.open('Relay?type=logs&annotation=ingest2');">Ingestor Log Download</button>
+			</td></tr>
+			<tr><td><textarea id="ingestor_log_content" readonly name="ingestor_log_content" rows="42" cols="88"></textarea></td></tr>
+			</table>
+		</div> <!-- end of tab page 2  (Ingestor Log) -->	
+		<div class="tabpage" id="LOG_tabpage_3">
+			<table>
+			<tr>
+			<td>
+			<button type="button" onclick="window.open('Relay?type=logs&annotation=ingest');">Ingestor Output Download</button>
+			</td></tr>
+			<tr><td><textarea id="ingestor_output_content" readonly name="ingestor_output_content" rows="42" cols="88"></textarea></td></tr>
+			</table>
+		</div> <!-- end of tab page 3  (Ingestor Output) -->	
+		<div class="tabpage" id="LOG_tabpage_4">
+			<table>
+			<tr>
+			<td>
+			<button type="button" onclick="window.open('Relay?type=logs&annotation=syslog');">Syslog Download</button>
+			</td></tr>
+			<tr><td><textarea id="syslog_content" readonly name="syslog_content" rows="42" cols="88"></textarea></td></tr>
+			</table>
+		</div> <!-- end of tab page 4  (Configuration File) -->	
+		<div class="tabpage" id="LOG_tabpage_5">
+			<table>
+			<tr>
+			<td>
+			<button type="button" onclick="window.open('Relay?type=logs&annotation=props');">Configuration File Download</button>
+			</td></tr><tr><td><textarea id="config_file_content" readonly name="config_file_content" rows="42" cols="88"></textarea></td></tr>
+			</table>
+		</div> <!-- end of tab page 5  (Configuration File) -->	
+	</div><!-- end LOG_tabContainer -->										
+</div> <!-- end of tab page 8  (logs) -->						

@@ -1,0 +1,1046 @@
+@charset "utf-8";
+/*----------------------------------------------
+/* CSS Document 
+/*
+/* Main Layout Elements
+/*   Master Items
+/*   Main Layout
+/*   Misc Header Items
+/*   Superfish Menu CSS
+/*   Main HCAP Navigation
+/*   Right Navigation
+/*
+/* Miscellaneous
+/*   Form Controls
+/*   Header Box
+/*   Status Messages (v2)
+/*   Warning Message
+/*   Bottom Frame Submit
+/*   Outer Frame
+/*   Create-Dir and Upload Widgets
+/*   Hash Reveal
+/*   Miscellaneous
+/*
+/* Directory & Namespace Tables
+/*   Table Option Links
+/*   Directory Table
+/*   Directory Table Columns
+/*   Namespace Table Columns
+/*   Permissions Table Columns
+/*   Retention Classes Table Columns
+/*
+/*----------------------------------------------*/
+
+/*--- Basic Styles ---*/
+html  { padding: 0px; margin: 0px; background-color: #fff; }
+body  { padding: 0px; margin: 0px; text-align: center; font-size: 11px; font-family: Arial, Helvetica, sans-serif; }
+form  { padding: 0px; margin: 0px; }
+h3    { margin: 0px 0px 5px 0px; font-size: 16px; font-weight: bold; }
+h4    { margin: 0px 0px 3px 0px; font-size: 14px; font-weight: bold; }
+p     { margin: 0px 0px 5px 0px; }
+ul    { margin: 0px 0px 0px 10px; padding: 0px;  }
+input { font-size: 11px; }
+
+/*----------------------------------------------
+/* Main Layout
+/*----------------------------------------------*/
+#mainContent {
+  position: relative;
+  width: 1226px;
+  margin: 0px auto;
+  text-align: left;
+  z-index: 500;
+}
+#mainContent div.mainHeader {
+  height: 37px;
+  background-image: url(../images/comet-hitachi-top-header.png);
+	background-position: left bottom;
+	background-repeat: no-repeat;
+  background-color: #000;
+}
+#mainContent div.bodyContent {
+  min-height: 350px;
+  padding-top: 38px;
+  background-color: #fff;
+  background-image: url(../images/navBotShad.png);
+  background-position: top;
+  background-repeat: repeat-x;
+	border-left: 1px solid #d0d0d0;
+	border-right: 1px solid #d0d0d0;
+}
+#mainContent div.bodyWrap {
+  padding: 0px 0px 0px 0px;
+}
+
+/*--- Footer ---*/
+#mainFooter {
+  height: 53px;
+  padding: 14px 20px 0px 20px;
+	background-color: #FFFFFF;
+  background-image: url(../images/footer-background.png);
+  background-repeat: no-repeat;
+	color: #777;
+	font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+}
+#mainFooter div.softwareInfo {
+  float: right;
+}
+
+
+.readOnlyNSB {
+   width:1206px;
+   background-image:url(../images/read-only-background-1206.png);
+   background-repeat:no-repeat;
+   line-height:15px;
+   color:#d93115;
+   margin-top:5px;
+   text-align:center;
+
+   }
+
+
+/*--- Columns ---*/
+div.column {
+  position: absolute;
+  top: 0;
+	width: 50%;
+  text-align: left;
+  height: 100%; 
+}
+#leftcol {
+	height: 100%;
+  margin-right: 613px;
+	background-image: url(../images/left-background.png);
+	background-position: right top;
+	background-repeat: no-repeat;
+}
+#rightcol {
+	height: 100%;
+  margin-left: 613px;
+	background-image: url(../images/right-background.png);
+	background-position: left top;
+	background-repeat: no-repeat;
+}
+
+
+/*----------------------------------------------
+/* Misc Header Items
+/*----------------------------------------------*/
+span.loggedInUser {
+  float: right;
+	margin-right: 100px;
+	padding-top: 20px;
+  color: #999;
+  font-size: 11px;
+}
+
+
+/*----------------------------------------------
+/* Superfish Menu CSS
+/*----------------------------------------------*/
+.sf-menu,
+.sf-menu * {
+  position: relative;
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+.sf-menu ul {
+	position: absolute;
+	top: -999em;
+}
+.sf-menu li {
+  position: static;
+	float: left;
+	line-height: 20px;
+}
+.sf-menu li:hover {
+	visibility: inherit;
+}
+.sf-menu a {
+  position: relative;
+	display: block;
+}
+.sf-menu li:hover ul,
+.sf-menu li.sfHover ul {
+  top: 24px;
+	left: 0;
+	z-index: 99;
+}
+
+
+/*----------------------------------------------
+/* Main HCAP Navigation
+/*----------------------------------------------*/
+#mainNavWrap {
+  position: relative;
+  height: 25px;
+  background-image: url(../images/top-nav-background2.png);
+	background-position: right top;
+	border-left: 1px solid #d0d0d0;
+	border-right: 1px solid #d0d0d0;
+}
+#mainNav {
+  width: 100%;
+	font-size: 12px;
+}
+#mainNav li {
+  padding-left: 2px;
+}
+#mainNav li:hover,
+#mainNav li.sf-breadcrumb {
+  background-image: url(../images/top-nav-right-selected-wsub.png);
+  background-position: left top;
+}
+#mainNav a {
+  padding: 4px 10px 0px 10px;
+  text-decoration: none;
+  color: #555;
+  font-weight: bold;
+}
+#mainNav li:hover a,
+#mainNav li.sf-breadcrumb a {
+  text-decoration: none;
+  color: #f38502;
+  font-weight: bold;
+	background-image: url(../images/top-nav-right-selected-nosub.png);
+  background-position: top right;
+}
+#mainNav a.sf-with-ul:hover {
+  background-image: url(../images/top-nav-right-selected-wsub.png);
+}
+
+
+/*----------------------------------------------
+/* Right Navigation
+/*----------------------------------------------*/
+#rightNavWrap {
+  position: absolute;
+	top: 43px;
+	right: 0px;
+	width: 400px;
+	text-align: right;
+}
+#rightNavWrap ul {
+  float: right;
+}
+#rightNavWrap * {
+  padding: 0px;
+	margin: 0px;
+}
+#rightNavWrap li {
+	line-height: 17px;
+	font-size: 10px;
+	padding: 0px 10px 0px 25px;
+	background-repeat: no-repeat;
+	background-position: left center;
+}
+#rightNavWrap a {
+  display: inline;
+	color: #555;
+	text-decoration: none;
+}
+#rightNavWrap a:hover {
+	color: #855;
+	text-decoration: underline;
+}
+
+
+/*----------------------------------------------
+/* Form Controls
+/*----------------------------------------------*/
+.pkForm label,
+.pkForm div.label {
+  display: block;
+  margin: 10px 0px 0px 0px;
+  color: #444;
+  font-weight: bold;
+	line-height: 18px;
+}
+.pkForm input[type="text"],
+.pkForm input[type="password"],
+.pkForm textarea,
+.pkForm select {
+  border: 1px solid #99a;
+	background-image: url(../images/input-background.png);
+    background-position: top left;
+	color: #555;
+	font-size: 12px;
+	padding: 2px;
+}
+.pkForm select               { padding: 0px; }
+
+/*--- Buttons ---*/
+div.pkButton {
+  margin: 0px 2px;
+  height: 26px;
+  background-color: transparent;
+  background-position: 0px 0px;
+  border-width: 0px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: bold;
+  line-height: 22px;
+	text-align: center;
+}
+div.button-orange-small    { width: 80px;  background-image: url(../images/button-orange-small.png); }
+div.button-orange-big      { width: 170px; background-image: url(../images/button-orange-big.png); }
+div.button-grey-small      { width: 80px;  background-image: url(../images/button-grey-small.png); }
+div.button-grey-big        { width: 170px; background-image: url(../images/button-grey-big.png); }
+div.button-grey-close      { width: 75px;  background-image: url(../images/button-grey-close.png); padding-left: 5px; }
+div.pkButton.enabled:hover { background-position: 0px -26px; cursor: pointer; color: #eee; }
+div.pkButton.disabled      { background-position: 0px -52px; cursor: default; }
+
+
+/*----------------------------------------------
+/* Header Box
+/*----------------------------------------------*/
+#headerBox {
+  position: relative;
+	height: 29px;
+	margin-bottom: 3px;
+	line-height: 29px;
+	background-image: url(../images/headerBoxBckgrnd.png);
+	background-repeat: repeat-x;
+	-moz-border-radius: 3px; 
+}
+#headerBox div.dirUp {
+	float: left;
+	padding: 3px 0px 3px 3px;
+}
+#headerBox div.header {
+	float: left;
+	font-size: 16px;
+	font-weight: bold;
+	padding: 0px 5px;
+}
+#headerBox div.label {
+	float: left;
+	color: #f49212;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+
+/*----------------------------------------------
+/* Status Messages (v2)
+/*----------------------------------------------*/
+div.statusMessage div.body {
+	background-position: left top;
+	background-repeat: repeat-x;
+	font-weight: bold;
+}
+div.statusMessage div.text {
+  min-height: 23px;
+  padding: 20px 15px 10px 15px;
+	font-size: 11px;
+}
+div.statusMessage div.dismiss {
+  float: right;
+  width: 86px;
+	height: 23px;
+	margin: 18px 15px 10px 10px;
+  background-image: url(../images/status2-dismiss.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	text-align: center;
+	line-height: 18px;
+	color: #eee;
+	cursor: pointer;
+}
+div.statusMessage div.dismiss:hover {
+  background-position: 0px -23px;
+  color: #ddd;
+}
+div.statusMessage div.footer {
+  height: 20px;
+	background-image: url(../images/status2-footer.png);
+	background-position: left bottom;
+	background-repeat: repeat-x;
+}
+
+/*--- Success & Error ---*/
+div.statusMessage div.success div.body { background-image: url(../images/status2-success.png); color: #0a8700; }
+div.statusMessage div.error div.body   { background-image: url(../images/status2-error.png); color: #963535; }
+
+/*--- Update Status ---*/
+#updateStatus div.text    { padding: 25px 25px 10px 25px; }
+#updateStatus div.dismiss { margin: 23px 25px 10px 10px; }
+
+/*--- Overlays ---*/
+#overlayStatus div.body    { background-position: 0px -5px; }
+#overlayStatus div.dismiss { display: none; }
+
+
+/*----------------------------------------------
+/* Warning Message
+/*----------------------------------------------*/
+div.warningMessage { padding: 0px; margin-top: 10px; }
+div.warningMessage div.us-headermain,
+div.warningMessage div.us-footermain { height: 8px; margin-right: 8px; }
+div.warningMessage div.us-headermain { background-position: left top; }
+div.warningMessage div.us-footermain { background-position: left bottom; }
+div.warningMessage div.us-headercap,
+div.warningMessage div.us-footercap { float: right; width: 8px; height: 8px; }
+div.warningMessage div.us-headercap { background-position: right top; }
+div.warningMessage div.us-footercap { background-position: right bottom; }
+div.warningMessage div.us-rightcap {
+  position: relative;
+  padding-right: 8px;
+  background-position: right top;
+}
+div.warningMessage div.text {
+  padding: 10px 20px 10px 100px;
+    font-size: 11px;
+    font-weight: bold;
+    font-style: normal;
+    background-position: left center;
+    background-repeat: no-repeat;
+    min-height: 30px;
+}
+
+/*--- Warning ---*/
+div.warningMessage div.warning div.us-headermain,
+div.warningMessage div.warning div.us-headercap,
+div.warningMessage div.warning div.us-footermain,
+div.warningMessage div.warning div.us-footercap { background-image: url(../images/status-warn.png); }
+div.warningMessage div.warning div.us-body,
+div.warningMessage div.warning div.us-rightcap { background-image: url(../images/status-warn-body.png); }
+div.warningMessage div.warning div.dismiss { background-image: url(../images/status-error-button.png); }
+div.warningMessage div.warning div.text { background-image: url(../images/status-warn-icon.png); color: #9f5902; }
+
+
+/*----------------------------------------------
+/* Outer Frame
+/*----------------------------------------------*/
+div.outerFrame2 div.of-leftcap {
+  margin-top: 0px;
+  padding-left: 21px;
+	background-image: url(../images/outerframe.png);
+	background-position: left top;
+	background-repeat: no-repeat;
+}
+div.outerFrame2 div.of-rightcap {
+  padding-right: 21px;
+	background-image: url(../images/outerframe.png);
+	background-position: right top;
+	background-repeat: no-repeat;
+}
+div.outerFrame2 div.of-headercap {
+  padding-top: 21px;
+	background-image: url(../images/outerframe.png);
+	background-position: -21px top;
+	background-repeat: no-repeat;
+}
+div.outerFrame2 div.of-content {
+  min-height: 230px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+/*--- Content Items ---*/
+div.outerFrame2 h1 {
+  margin: 0px;
+  padding: 2px 0px;
+  font-size: 16px;
+}
+div.outerFrame2 div.subtitle {
+  margin: 3px 0px 20px 0px;
+  color: #777;
+}
+div.outerFrame2 div.h2link a {
+  float: right;
+  font-size: 10px;
+  margin-top: 8px;
+}
+
+
+/*----------------------------------------------
+/* Bottom Frame Submit
+/*----------------------------------------------*/
+div.bottomFrameSubmit div.bfs-content  {
+  padding: 0px 20px;
+	min-height: 100px;
+}
+div.bottomFrameSubmit div.bfs-footer  {
+  height: 70px;
+	background-image: url(../images/submitrow.png);
+	background-repeat: no-repeat;
+	background-position: right top;
+}
+div.bottomFrameSubmit div.bfs-footercap {
+  float: left;
+  width: 20px;
+  height: 70px;
+	background-image: url(../images/submitrow.png);
+	background-repeat: no-repeat;
+	background-position: left top;
+}
+div.bottomFrameSubmit div.bfs-buttons {
+  padding: 35px 20px 0px 0px;
+}
+
+
+/*----------------------------------------------
+/* Create-Dir and Upload Widgets
+/*----------------------------------------------*/
+#headerBox div.rightTab {
+  position: absolute;
+	right: 10px;
+	z-index: 10;
+	float: right;
+	width: 117px;
+	height: 38px;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	color: #777;
+	background-image: url(../images/create-dir-select.png);
+	background-position: 0px -50px;
+	background-repeat: no-repeat;
+	-moz-border-radius: 3px; 
+	cursor: pointer;
+}
+#headerBox div.rightTab.selected {
+  background-position: 0px 0px;
+	color: #fff;
+}
+
+/*--- Tab Contents (Create-Dir and Upload Widgets) ---*/
+#headerTabContents {
+  height: 40px;
+  background-image: url(../images/browze-background.png);
+	background-position: right top;
+	background-repeat: no-repeat;
+	background-color: #fff;
+	text-align: right;
+	-moz-border-radius: 3px;
+}
+#createDir, #uploadFile {
+  padding: 10px 10px 0px 0px;
+}
+
+/*----------------------------------------------
+/* Hash Reveal
+/*----------------------------------------------*/
+div.hashHover span.trigger {
+  position: relative;
+	color: #fc840e;
+}
+div.hashHover div.hash {
+  position: absolute;  
+  top: -15px;
+  left: -875px;
+	display: none;
+  width: 875px;
+  height: 48px;
+  background-image: url(../images/hash-background.png);
+	text-decoration: none;
+	font-size: 11px;
+	text-align: center;
+	line-height: 45px;
+  color: #fff;
+}
+
+
+/*----------------------------------------------
+/* Miscellaneous
+/*----------------------------------------------*/
+.cookieCrumbBox {
+	background-image:url(../images/cookieBackground.png);
+	background-repeat:no-repeat;
+	width:1204px;
+	height:15px;
+	padding-bottom:40px;
+	color:#9a9a9a;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:10px;
+}
+.dirFileBox {
+	float:right;
+	height:38px;
+	position:relative;
+	width:200px;
+}
+.passwordBox {
+	font-family:Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	font-size:11px;
+	color:#333333;
+}
+.uploadFile  a {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	color:#FFFFFF;
+}
+
+
+/*----------------------------------------------
+/* Table Option Links
+/*----------------------------------------------*/
+td.tableTopLinks {
+  height: 25px;
+  margin-bottom: 2px;
+
+}
+td.tableTopLinks a {
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fc840e;
+}
+
+td.tableTopPaging {
+  height: 25px;
+
+}
+
+/*----------------------------------------------
+/* Paging
+/*----------------------------------------------*/
+
+/* Previous -----------------------------------*/
+td.pagingPreviousEnabled {
+	background-color:#CCCCCC;
+	width:90px;
+	height: 25px;
+	background-image:url(../images/pagingPreviousEnabled.png);
+	background-repeat:no-repeat;
+}
+
+td.pagingPreviousEnabled a {
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fc840e;
+	padding-left:23px;
+}
+
+td.pagingPreviousDisabled {
+	background-color:#CCCCCC;
+	width:90px;
+	height: 25px;
+	background-image:url(../images/pagingPreviousDisabled.png);
+	background-repeat:no-repeat;
+}
+
+td.pagingPreviousDisabled a {
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #777777;
+	padding-left:23px;
+}
+
+/* Next -----------------------------------*/
+td.pagingNextEnabled {
+	background-color:#CCCCCC;
+	width:64px;
+	height: 25px;
+	background-image:url(../images/pagingNextEnabled.png);
+	background-repeat:no-repeat;
+}
+
+td.pagingNextEnabled a {
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fc840e;
+	padding-left:13px;
+}
+
+td.pagingNextDisabled {
+	background-color:#CCCCCC;
+	width:64px;
+	height: 25px;
+	background-image:url(../images/pagingNextDisabled.png);
+	background-repeat:no-repeat;
+}
+
+td.pagingNextDisabled a {
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	color: #777777;
+	padding-left:13px;
+}
+
+
+
+
+
+/*----------------------------------------------
+/* Directory & Namespace Table
+/*----------------------------------------------*/
+#directory,
+#namespace { 
+	border: solid 1px #666;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 11px;
+}
+#directory th,
+#namespace th {
+  padding: 0px 3px;
+  background-image: url(../images/theadBackground.png);
+	background-repeat: repeat-x;
+	color: #e1e1e1;
+	font-size: 11px;
+  font-weight: bold;
+  line-height: 19px;
+	text-align: left;
+}
+#directory td,
+#namespace td {
+	border-right: solid 1px #d0d0d0;
+	padding-left: 3px;
+	text-align: left;
+	line-height: 20px;
+}
+#directory tr.odd td,
+#namespace tr.odd td {
+    background-color: #edf3fe;
+}
+#directory .cellNoBorder,
+#namespace .cellNoBorder {
+  border: 1px solid #fff;
+}
+#directory a,
+#namespace a { 
+	font-size: 11px;
+	text-decoration:none;
+	color: #fc840e;
+}
+#directory a:hover,
+#namespace a:hover { 
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:11px;
+	text-decoration:underline;
+	color: #f5740c;
+}
+#directory span.spacer,
+#namespace span.spacer {
+  padding: 0px 5px;
+	color: #999;
+}
+
+/*----------------------------------------------
+/* Directory Table Columns
+/*----------------------------------------------*/
+#directory td.icons {  
+  /* width: 70px;   -- width Set inline */
+	background-image: url(../images/dataAccessTable-controlBackground.png);
+	background-repeat: repeat-y;
+	background-position: left top;
+	border-right: 1px solid #aaa;
+	white-space: nowrap;
+}
+#directory td.name           { min-width: 240px; }
+#directory td.version        { min-width: 240px; }
+#directory td.owner          { min-width:  90px; }
+#directory td.domain         { min-width:  90px; }
+#directory td.size           { }
+#directory td.retention      { width: 130px; }
+#directory td.retentionClass { }
+#directory td.ingested       { width: 120px; }
+#directory td.metadata       { width: 111px; }
+#directory td.dpl            { }
+#directory td.hash           { width: 100px; }
+
+/*--- Deleted (and Empty) Object ---*/
+#directory td.empty,
+#directory tr.deleted td      { color:#999999; }
+#directory tr.deleted td.name { color:#666666; text-decoration: line-through; }
+
+/*--- Icon Images ---*/
+#directory td.icons img           { border: 0px solid #f00; }
+#directory td.icons div.iconWrap  { position: relative; border: 0px solid #f00; height: 20px; }
+#directory td.icons span.object   { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 1px; }
+#directory td.icons span.delete   { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 26px; cursor: pointer}
+#directory td.icons span.versions { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 48px; }
+
+/*--- Metadata Images ---*/
+#directory td.metadata img          { border: 0px solid #f00; }
+#directory td.metadata div.iconWrap { position: relative; border: 0px solid #f00; height: 20px; }
+#directory td.metadata span.hold    { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 3px; }
+#directory td.metadata span.shred   { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 24px; }
+#directory td.metadata span.index   { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 45px; }
+#directory td.metadata span.cm      { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 66px; }
+#directory td.metadata span.acl     { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 87px; }
+
+
+/*----------------------------------------------
+/* Namespace Table Columns
+/*----------------------------------------------*/
+#namespace td.name           { min-width: 200px; }
+#namespace td.hash           { }
+#namespace td.dpl            { }
+#namespace td.versioning     { }
+#namespace td.search         { }
+#namespace td.retentionMode  { }
+#namespace td.shred          { }
+#namespace td.index          { }
+#namespace td.retention      { }
+#namespace td.links          { width: 240px; text-align: center; white-space: no-wrap; background-color: #eeecec; }
+
+#namespace tr.description td {
+  padding: 5px 5px 15px 5px;
+	background-image: url(../images/ns-description-bckgrnd.png);
+	background-position: left top;
+	background-repeat: repeat-x;
+  background-color: #ccc;
+}
+
+
+/*----------------------------------------------
+/* Permissions Table Columns
+/*----------------------------------------------*/
+#namespace tr.odd  td.permName { }
+#namespace tr.even td.permName { }
+#namespace td.rwd { width: 80px; }
+
+
+/*----------------------------------------------
+/* Retention Classes Table Columns
+/*----------------------------------------------*/
+#namespace td.rcName        { }
+#namespace td.rcValue       { }
+#namespace td.rcAutoDelete  { }
+#namespace td.rcDescription { width: 500px }
+
+
+
+.loading {
+  min-height: 100px;
+  background-image: url(../images/ajax-loader.gif);
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+/*----------------------------------------------
+/* Expandable Table
+/*----------------------------------------------*/
+
+/*--- Shadows --*/
+table.tableExpand th.shadowLeft,
+table.tableExpand th.shadowRight { background-image: url(../images/table-expand-shadow.png); width: 10px; }
+table.tableExpand th.shadowLeft  { background-position: left top; }
+table.tableExpand th.shadowRight { background-position: right top; }
+table.tableExpand td.shadowLeft,
+table.tableExpand td.shadowRight { background-image: url(../images/table-expand-title-shadows.png); width: 10px; }
+table.tableExpand td.shadowLeft  { background-position: left top; }
+table.tableExpand td.shadowRight { background-position: right top; }
+table.contentTable td.shadowLeft,
+table.contentTable td.shadowRight { background-image: url(../images/table-expand-title-shadows.png); width: 10px; background-repeat: repeat-y;}
+table.contentTable td.shadowLeft { background-position: left; }
+table.contentTable td.shadowRight { background-position: right; }
+
+/*--- Header --*/
+table.tableExpand th.headerLeft,
+table.tableExpand th.headerMain,
+table.tableExpand th.headerRight {
+  height: 23px;
+    padding: 0px 10px;
+  background-image: url(../images/table-expand-header.png);
+    background-color: #111;
+    color: #fff;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 22px;
+    white-space: nowrap;
+}
+table.tableExpand th.headerLeft  { background-position: left top; text-align:left; }
+table.tableExpand th.headerMain  { background-position: -30px top; text-align:left; }
+table.tableExpand th.headerRight { background-position: right top; text-align:left; }
+
+/*--- Footer --*/
+table.tableExpand td.footerLeft,
+table.tableExpand td.footerRight { background-image: url(../images/table-expand-footer.png); height: 14px; }
+table.tableExpand td.footerLeft  { background-position: top left; }
+table.tableExpand td.footerRight { background-position: top right; }
+table.tableExpandFooter { width: 100%;}
+table.tableExpandFooter td.footerLeft,
+table.tableExpandFooter td.footerMiddle,
+table.tableExpandFooter td.footerRight  { background-image: url(../images/table-expand-footer.png); height: 14px; }
+table.tableExpandFooter td.footerLeft   { background-position: top left; width: 30%; }
+table.tableExpandFooter td.footerMiddle { background-position: top center; width: 40%; }
+table.tableExpandFooter td.footerRight  { background-position: top right; width: 30%; }
+
+/*--- Titles --*/
+table.tableExpand tr.titleRow td.titleLeft,
+table.tableExpand tr.titleRow td.titleMain,
+table.tableExpand tr.titleRow td.titleRight,
+table.tableExpand tr.titleRowNoExpand td.titleLeft,
+table.tableExpand tr.titleRowNoExpand td.titleMain,
+table.tableExpand tr.titleRowNoExpand td.titleRight {
+  position: relative;
+  height: 20px;
+  padding: 1px 10px 0px 10px;
+  color: #ccc;
+    background-image: url(../images/table-expand-title.png);
+    background-color: #6D6D6D;
+  font-size: 11px;
+  line-height: 20px;
+  white-space: nowrap;
+  clear:both;
+
+}
+table.tableExpand tr.titleRow td.titleLeft,
+table.tableExpand tr.titleRow td.titleMain,
+table.tableExpand tr.titleRow td.titleRight {
+  cursor: pointer;
+}
+table.tableExpand tr.titleRow td.evenCol,
+table.tableExpand tr.titleRowNoExpand td.evenCol {
+  background-position: left -52px;
+    background-color: #797979;
+}
+
+/*--- Arrows --*/
+table.tableExpand tr.titleRow th.arrow {
+  padding-left: 25px;
+}
+table.tableExpand tr.titleRow span.arrow {
+  display: block;
+  float: left;
+  width: 15px;
+    height: 20px;
+    background-image: url(../images/arrow-grey.png);
+    background-repeat: no-repeat;
+    background-position: left 5px;
+}
+
+/*--- Selected Titles --*/
+table.tableExpand tr.titleSelected td.titleLeft,
+table.tableExpand tr.titleSelected td.titleMain,
+table.tableExpand tr.titleSelected td.titleRight {
+  background-position: left -26px;
+  color: #fff;
+}
+table.tableExpand tr.titleSelected td.evenCol { background-position: left -78px; }
+table.tableExpand tr.titleSelected span.arrow { background-position: left -19px; }
+
+
+/*----------------------------------------------
+/* Percent Quota
+/*----------------------------------------------*/
+div.percentQuota {
+  float: left;
+  width: 150px;
+  margin-top: 8px;
+  margin-right: 8px;
+  background-color: #fff;
+}
+div.percentQuota div.percentUsed {
+  height: 3px;
+  background-image: url(../images/percentused.png);
+  background-color: #2895fe;
+  border: 1px solid #fff;
+  min-width: 1px;
+}
+div.percentQuota div.percentUsed.replication {
+  float: right;
+  background-image: url(../images/percentused_replication.png);
+  background-position: right top;
+}
+td.quota, td.storage { font-size: 10px !important; font-weight: bold; }
+div.quotaLeftHead    { float: left; width: 100px; margin-right: 140px; }
+div.quotaLeft        { float: left; width: 75px; margin-right: 165px; text-align: right; }
+div.quotaRight       { margin-left: 205px; }
+
+div.percentQuota div.percentUsed.migration {
+  float: left;
+  background-image: url(../images/migration-progress-bar.png);
+  background-position: left top;
+}
+
+/*----------------------------------------------
+/*	Add to list
+/*----------------------------------------------*/
+span.addToList_findButton {
+	display: block;
+	width: 24px;
+	height: 19px;
+	background-color:#000000;
+	background-image: url(../images/addToList-findButton-bg.png);
+    cursor: pointer;
+	}
+
+span.addToList_clearButton {
+	display: block;
+	width: 24px;
+	height: 19px;
+	background-color:#000000;
+	background-image: url(../images/addToList-clearButton-bg.png);
+    cursor: pointer;
+	}
+
+/*--- Tiny Buttons ---*/
+span.button-tiny,
+	span.button-tiny-add {
+		display: block;
+		padding: 3px 2px;
+		border: 1px solid #555;
+		background-image: url(../images/button-black-tiny.png);
+		background-position: 0px -5px;
+		background-color: #545454;
+		color: #eee;
+		line-height: 12px;
+		font-size: 10px;
+		font-weight: bold;
+		text-decoration: none;
+		cursor: pointer;
+		text-align:center;
+	}
+
+	span.button-tiny-add {  background-position: right -3px; }
+	span.button-tiny:hover { background-position: left -28px; }
+	span.button-tiny-add:hover { background-position: right -28px; }
+
+.infoRow .empty {
+  color: #bbb;
+  font-size: 11px;
+    font-style: italic;
+  line-height: 30px;
+    text-align: center;
+    background-color: #777;
+    border-top: 1px solid #444;
+}
+
+
+/*----------------------------------------------
+/* Expandable Table Content
+/*----------------------------------------------*/
+table.tableExpand th { white-space: nowrap; }
+table.tableExpand tr.infoRow td.info { margin: 0px; padding: 0px; }
+
+/*--- Information Row Tabs ---*/
+div.infoTabs {
+    height: 20px;
+    padding-left: 15px;
+    background-color: #bbb;
+    background-image: url(../images/tenantslist-tab-bg.png);
+    background-repeat: repeat-x;
+}
+div.infoTabs div.infoTab {
+    float: left;
+    width: 145px;
+    margin: 0px 2px 0px 2px;
+    background-color: #eee;
+    background-image: url(../images/tenantslist-tab.png);
+    background-position: left top;
+    color: #999;
+    font-weight: bold;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+div.infoTabs div.selected,
+div.infoTabs div.selected:hover {
+    background-color: #fdf1e1;
+    background-position: left -20px;
+    color: #e98101;
+    cursor: default;
+}
+

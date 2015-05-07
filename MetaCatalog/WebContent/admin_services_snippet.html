@@ -1,0 +1,48 @@
+<div class="tabpage" id="ADMIN_tabpage_2">
+       <h2>Services</h2>
+       <table>
+       <tr>
+       <td>
+	       <button type="button" onclick="CometControlsAdminShutdown()">Shutdown Server</button>
+       </td>
+       <td>
+	       <button type="button" onclick="CometControlsAdminRestart()">Restart Server</button>
+       </td>
+       <td>
+	       <button type="button" onclick="CometControlsAdminUpgrade()">Upgrade Comet via HCP</button>
+       </td>
+       </tr>
+
+
+       <tr>
+       <td>											
+	       <button type="button" onclick="CometControlsAdminStop()">Stop Comet Service</button>
+       </td>
+       <td>
+	       <button type="button" onclick="CometControlsAdminStart()">Start Comet Service</button>
+       </td>
+       <td>
+	       <button type="button" onclick="CometControlsAdminStatus()">Check Status of Comet Service</button>
+	</td>
+	</tr>
+
+	<tr>
+	<td>
+	<button type="button" onclick="CometControlsAdminBackup()">Backup Configuration to HCP</button>
+	</td>
+	<td>
+	<button type="button" onclick="CometControlsAdminRestore()">Restore Configuration to HCP</button>
+	</td>
+	<td>
+	<button type="button" onclick="CometControlsAdminClear()">Clear Messages</button>
+	</td>
+	</tr>
+
+	<tr>
+	<td colspan=3>
+	<textarea id="admin_status_message" readonly name="admin_status_message" rows="42" cols="88"></textarea>
+	</td>
+	</tr>
+	</table>
+</div> <!-- end of ADMIN tab page 2 (services) -->						
+			

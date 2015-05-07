@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Hitachi COMET (SelectBox test)</title>
+        <link rel="SHORTCUT ICON" href="favicon.ico"/>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+        <link rel="stylesheet" type="text/css" media="screen" href="css/hds-data-access-styles.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/hds-data-access-styles-additional.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/tabs.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/tooltip.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/jqueryFileTree.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/mediaelementplayer.min.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/prettify.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/ui-lightness/jquery-ui.min.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/jquery.ui.timepicker-addon.css" />
+  	<link rel="stylesheet" type="text/css" media="screen" href="css/styles.css"/>
+	
+
+	<!-- latest JQUERY -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery-2.0.3.min.js"></script>
+	<!-- latest JQUERY UI -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery-ui.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.ui.timepicker-addon.js"></script>
+
+
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jQuery.validity.js"></script>
+<!--	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.reflection.js"></script> -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.form.js"></script>
+
+
+
+<!--added for upload capability -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/plupload.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/plupload.html4.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/plupload.html5.js"></script>
+<!--end upload capability -->
+
+
+<!--begin file tree capability -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/jqueryFileTree.js"></script>
+<!--end file tree capability -->
+
+<!-- begin word cloud thing --->
+<!-- jquery is broken	<script type="text/javascript" charset="utf-8" language="javascript" src="js/jquery.tagcanvas.min.js"></script> -->
+
+<script type="text/javascript" charset="utf-8" language="javascript" src="js/jquery.tagcanvas.min.js"></script>
+<!--end word cloud thing--->
+
+
+<!-- media player -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/mediaelement-and-player.min.js"></script>
+<!-- end media player -->
+
+
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/reflection.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="http://www.google.com/jsapi?key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw"></script>
+<!--	<script type="text/javascript" charset="utf-8" language="javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDUCJndPhuq81XUhHUO5Yxtvzpb5pqaVsk&sensor=false"> </script> --> 
+
+
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/prettify.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/vkbeautify.0.99.00.beta.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/googleearth.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/comet.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/comet_wip.js"></script>
+	<script type="text/javascript">  var testing=true; use_google_earth=false;  </script>
+	<script type="text/javascript">
+	
+	
+	window.onload=function() {
+	
+		//console.log("get this far");
+		
+		
+		
+
+		//initialize google earth
+
+		//get properties from Java
+		//console.log("before qp");
+		CometControlsQueryProperties();
+		//console.log("after qp");
+
+
+		//initialize tabs
+		InitTabs("LHS");
+		//InitTabs("RHS");
+		
+		//document.getElementById("metadataEditor").style.display="none"
+		
+	}
+	jQuery(function($) {
+	$("img.reflect").reflect({/* Put custom options here */});
+});
+
+
+
+
+
+	</script>
+	
+	
+	</head>
+	<body>
+		<!-- tooltip java script includes, must be in body -->
+		<script src="js/wz_tooltip.js" type="text/javascript"></script>
+		
+		<div id="mainContent">
+			<!-- Main Header -->
+			<div class="mainHeader">
+-			</div>
+		
+			<div class="bodyContent">
+              	
+				<div class="bodyWrap">
+					<center>
+					<div id="hide_iframe"><iframe name="iframe" id="iframe" style="border: 0px;"></iframe></div>
+					<table border=0 id="main_table">
+						<tr>
+							<td colspan=2 ><center><div><span id="caveat_top">Loading...</span></div></center></td>
+						
+						</tr>
+					
+						<tr>
+							<td>
+
+							<!-- Column 1 -->
+							 <div id="LHSwrapper">
+								<div id="LHS_tabContainer" style="height: 770px; width: 1150px;">
+								
+									<div class="tabs">
+      										<ul>
+											<li id="LHS_tabHeader_1">Select Box Test</li>
+										</ul> 
+									</div> <!-- LHS tabs -->
+									
+									<!-- 70 pixels shorter than tabcontainer -->
+									<div class="tabscontent" style="height: 700px;">
+										<div class="tabpage" id="LHS_tabpage_1">
+											        <h2>Select Box Test</h2>
+
+
+
+<table border=1>
+	<tr>
+		<td colspan="2">
+			<b>Path: </b><input id="pe_path" name="pe_path" type=text size=40 value="/StreamTest/florida.stream" />
+			<input type="button" onmousedown="SBLoadTest()" value="Load" />
+		</td>
+	</tr>
+	<tr>
+		<td>Position: </td>
+		<td colspan="2"><select id="pe_select" onchange='SBOnChange()'><option>loading</option></select></td>
+	</tr>
+	
+	<tr>
+		<td><label for="pe_startdate">Start Date:</label></td><td><input type="text" id="pe_startdate" name="pe_startdate"/></td>
+	</tr>
+	
+	<tr>
+		<td>Latitude:</td>
+		<td><input type="text" id="pe_latitude" name="pe_latitude"/></td>
+	</tr>
+
+	<tr>
+		<td>Longitude:</td>
+		<td><input type="text" id="pe_longitude" name="pe_longitude"/></td>
+	</tr>
+	
+	<tr>
+		<td colspan="2">
+		<input type="button" onmousedown="AppendNew()" value=" + " />
+		&nbsp;&nbsp;
+		<input type="button" onmousedown="DeleteCurrent()" value=" - " />
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="button" onmousedown="Commit()" value="save" />
+		</td>
+	</tr>
+</table>		
+				
+	
+												      
+												      
+												
+												
+												
+													
+										</div>
+									</div>
+								</div>
+							</div>
+							</td>					
+
+						</tr>
+						<tr>
+							<td colspan=2 ><center><span id="caveat_bottom">Loading...</span></center></td>
+						
+						</tr>
+
+					</table>
+					
+					</center>
+                </div> <!-- wrapper -->
+		
+                		<!-- <div class="clear">&nbsp;</div> -->
+            		</div> <!-- body wrap?? -->
+			
+			<!-- Right Navigation -->
+        		<div id="rightNavWrap">
+				
+	                <ul id="rightNav" class="sf-menu">
+                    		<li >
+			    	<table><tr><td style="width=30px;"><div id="loaderImage"></div></td><td><img src="images/icon-user.png" /></td><td><span id="loggedin_user"></span> |</td><td>
+			    	<span id="logoutBtn" type="submit" onclick='CometControlsLogoutBTN()' style="cursor:pointer">Sign Out</span></td></tr></table>
+			    </li>
+                	</ul>
+            		</div> <!--- rightNavWrap -->
+
+		        <!-- Main Footer -->
+        		<div id="mainFooter">
+                		<div class="softwareInfo">
+                			<table><tr><td>
+		                		<div>Installed COMET Version: <span id="installed-comet-version" style="font-weight: bold;">Loading...</span></div>
+        					</td>
+        					
+        					<td>        			
+		                		<div id="google_plugin">Installed Plugin Version: <span id="installed-plugin-version" style="font-weight: bold;">Loading...</span></div>
+                			</td></tr></table>
+                		</div>
+                		<div class="copyright">&copy; 2013 Hitachi Data Systems Federal Corporation. All rights reserved.</div>
+		        </div>
+			
+			
+		</div><!-- mainContent -->
+		<!-- Extra Floating Divs -->
+        	<div class="column" style="left: 0px;"><div id="leftcol">&nbsp;</div></div>
+		<div class="column" style="right: 0px;"><div id="rightcol">&nbsp;</div></div> 
+	</body>
+</html>
+

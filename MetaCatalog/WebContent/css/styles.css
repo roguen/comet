@@ -1,0 +1,508 @@
+/*
+//Copyright (c) 2015 Hitachi Data Systems, Inc.
+//All Rights Reserved.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License"); you may
+//   not use this file except in compliance with the License. You may obtain
+//   a copy of the License at
+//
+//         http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+//   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+//   License for the specific language governing permissions and limitations
+//   under the License.
+//
+//Package: COMET Web Application
+//Author: Chris Delezenski <chris.delezenski@hdsfed.com>
+//Compilation Date: 2015-05-06
+//License: Apache License, Version 2.0
+//Version: 1.21.0
+//(RPM) Release: 1
+//SVN: r554
+.content {
+	background-color: #36F;
+	color: black;
+	margin-top: 60px;
+	height: 100%;
+} 
+*/
+
+#mapGIS {
+	padding-bottom:5px;
+	padding-top:5px;
+}
+
+#map_canvas {
+	min-height: 400px;
+	text-align: center;
+	overflow:visible;
+	color:black;
+}
+
+#GIS_range {
+	min-height: 40px;
+	float: none;
+	color: #000;
+}
+
+#white {
+	color: #FFF;
+}
+#black {
+	color: #000;
+}
+
+#dragbox {
+	color: #FFF;
+	text-align: center;
+}
+
+#locationMarker{
+	color: #FFF;
+	text-align: center;
+}
+
+#tableBody {
+	color:black;
+}
+ 
+#header-fixed {
+    position: fixed;
+    top: 0px;
+    display:none;
+    background-color:white;
+}
+
+#infowindow{
+	color: red;
+}
+#consoleLog {
+	width: 100%;
+}
+
+#textRow {
+	padding-top: 5px;
+}
+
+#iFrame {
+    display     : none;
+    visibility  : visible;
+    height      : 1px;
+ }
+
+a {
+	color: #000;
+}
+
+label {
+	color: #000;
+}
+
+.table-striped tbody tr:nth-child(odd) td, .table-striped tbody tr:nth-child(odd) th {
+  background-color: #FFF;
+}
+
+/* for the datatables plugin */
+	
+div.dataTables_length label {
+	float: left;
+	text-align: left;
+	color: #000000;
+}
+
+div.dataTables_length select {
+	width: 75px;
+}
+
+div.dataTables_filter {
+	float: right;
+	color: #000000;
+}
+
+div.dataTables_info {
+	padding-top: 0px;
+	color: #000;
+}
+
+div.dataTables_paginate {
+	float: right;
+	margin: 0;
+	color: #000;
+	background-color: #fc950e;
+	height: 0px;
+}
+
+
+
+/* for pagination */
+.pagination {
+  height: 18px;
+  margin: 9px 0px;
+  font-size: 9px
+}
+.pagination ul {
+  display: inline-block;
+  margin-left: 0;
+  margin-bottom: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+  color: black;
+}
+.pagination li {
+  display: inline;
+  
+}
+.pagination a {
+  float: left;
+  padding: 0 14px;
+  line-height: 15px;
+  text-decoration: none;
+  border: 1px solid #ddd;
+  border-left-width: 0;
+  color: #FFF;
+  background-color: #fc950e;
+}
+.pagination a:hover, .pagination .active a {
+ 
+   color: #111111;
+  cursor: default;
+  background-color: #f5f5f5;
+ 
+}
+.pagination .active a {
+  color: #111111;
+  cursor: default;
+  background-color: #f5f5f5;
+ }
+.pagination .disabled a, .pagination .disabled a:hover {
+  color: #999999;
+  background-color: gray;
+  cursor: default;
+}
+.pagination li:first-child a {
+  border-left-width: 1px;
+  -webkit-border-radius: 3px 0 0 3px;
+  -moz-border-radius: 3px 0 0 3px;
+  border-radius: 3px 0 0 3px;
+}
+.pagination li:last-child a {
+  -webkit-border-radius: 0 3px 3px 0;
+  -moz-border-radius: 0 3px 3px 0;
+  border-radius: 0 3px 3px 0;
+}
+.pagination-centered {
+  text-align: center;
+}
+.pagination-right {
+  text-align: right;
+}
+
+
+
+/* end pagination*/
+
+
+
+
+
+
+
+
+
+table.table {
+	clear: both;
+	margin-bottom: 6px !important;
+	margin-left: 0px;
+	color: #000;
+	-webkit-border-horizontal-spacing: 0px;
+	-webkit-border-vertical-spacing: 0px;
+}
+
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+	cursor: pointer;
+	
+}
+
+table.table thead .sorting { background: url('../images/sort_both.png') no-repeat center right; }
+table.table thead .sorting_asc { background: url('../images/sort_asc.png') no-repeat center right; }
+table.table thead .sorting_desc { background: url('../images/sort_desc.png') no-repeat center right; }
+
+table.table thead .sorting_asc_disabled { background: url('../images/sort_asc_disabled.png') no-repeat center right; }
+table.table thead .sorting_desc_disabled { background: url('../images/sort_desc_disabled.png') no-repeat center right; }
+
+table.dataTable th:active {
+	outline: none;
+	color: #000;
+
+}
+/* end datatables styling */
+
+
+
+
+/*----------------------------------------------
+/* dataTable & Namespace Table
+/*----------------------------------------------*/
+#dataTable,
+#namespace,
+#testTable th,
+#testTable2 th { 
+/*	border: solid 1px #666;*/
+/*	font-family: Arial, Helvetica, sans-serif;*/
+	font-size: 13px;
+	-webkit-border-horizontal-spacing: 0px;
+	-webkit-border-vertical-spacing: 0px;
+}
+#dataTable th,
+#namespace th,
+#testTable th,
+#testTable2 th {
+  padding: 0px 0px;
+  background-image: url(../images/theadBackground.png);
+	background-repeat: repeat-x;
+	color: #e1e1e1;
+	font-size: 11px;
+  font-weight: bold;
+  line-height: 19px;
+	text-align: left;
+	-webkit-border-horizontal-spacing: 0px;
+	-webkit-border-vertical-spacing: 0px;
+}
+#dataTable td,
+#namespace td,
+#testTable td,
+#testTable2 td  {
+	/*border-right: solid 1px #d0d0d0;*/
+	padding-left: 0px;
+	text-align: left;
+	line-height: 20px;
+	-webkit-border-horizontal-spacing: 0px;
+	-webkit-border-vertical-spacing: 0px;
+}
+#dataTable tr.odd td,
+#namespace tr.odd td {
+    background-color: #edf3fe;
+}
+#dataTable .cellNoBorder,
+#namespace .cellNoBorder,
+#testTable .cellNoBorder,
+#testTable2 .cellNoBorder  {
+  /*border: 1px solid #fff;*/
+}
+#dataTable a,
+#namespace a { 
+	font-size: 13px;
+	text-decoration:none;
+	color: #fc840e;
+}
+#dataTable a:hover,
+#namespace a:hover,
+#testTable a:hover,
+#testTable2 a:hover  { 
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	text-decoration:underline;
+	color: #f5740c;
+}
+#dataTable span.spacer,
+#namespace span.spacer,
+#testTable span.spacer,
+#testTable2 span.spacer {
+ /* padding: 0px 0px;
+	color: #999;*/
+}
+
+/*----------------------------------------------
+/* dataTable Table Columns
+/*----------------------------------------------*/
+#dataTable td.icons {  
+  /* width: 70px;   -- width Set inline */
+	background-image: url(../images/dataAccessTable-controlBackground.png);
+	background-repeat: repeat-y;
+	background-position: left top;
+	/*border-right: 1px solid #aaa;*/
+	white-space: nowrap;
+}
+#dataTable td.name           { min-width: 240px; }
+#dataTable td.version        { min-width: 240px; }
+#dataTable td.owner          { min-width:  90px; }
+#dataTable td.domain         { min-width:  90px; }
+#dataTable td.size           { }
+#dataTable td.retention      { width: 130px; }
+#dataTable td.retentionClass { }
+#dataTable td.ingested       { width: 120px; }
+#dataTable td.metadata       { width: 111px; }
+#dataTable td.dpl            { }
+#dataTable td.hash           { width: 100px; }
+
+/*--- Deleted (and Empty) Object ---*/
+#dataTable td.empty,
+#dataTable tr.deleted td      { color:#999999; }
+#dataTable tr.deleted td.name { color:#666666; text-decoration: line-through; }
+
+/*--- Icon Images ---*/
+#dataTable td.icons img           { border: 0px solid #f00; }
+#dataTable td.icons div.iconWrap  { position: relative; border: 0px solid #f00; height: 20px; }
+#dataTable td.icons span.object   { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 1px; }
+#dataTable td.icons span.delete   { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 26px; cursor: pointer}
+#dataTable td.icons span.versions { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 48px; }
+
+/*--- Metadata Images ---*/
+#dataTable td.metadata img          { border: 0px solid #f00; }
+#dataTable td.metadata div.iconWrap { position: relative; border: 0px solid #f00; height: 20px; }
+#dataTable td.metadata span.hold    { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 3px; }
+#dataTable td.metadata span.shred   { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 24px; }
+#dataTable td.metadata span.index   { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 45px; }
+#dataTable td.metadata span.cm      { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 66px; }
+#dataTable td.metadata span.acl     { display: block; width: 18px; height: 18px; position: absolute; top: 1px; left: 87px; }
+
+
+
+/*----------------------------------------------
+/* jqueryFileTree
+/*----------------------------------------------*/
+.dir_viewer {
+	float: left;
+	margin: 15px;
+}
+			
+.fileTree {
+	width: 700px;
+	height: 300px;
+	border-top: solid 1px #BBB;
+	border-left: solid 1px #BBB;
+	border-bottom: solid 1px #FFF;
+	border-right: solid 1px #FFF;
+	background: #FFF;
+	overflow: scroll;
+	padding: 5px;
+}
+
+.highlighted_file {
+	background: blue;
+
+
+}
+
+/**********************************************/
+/* added for jquery-ui */
+/**********************************************/
+
+.toggler {
+width: 300px;
+height: 80px;
+}
+
+#cal_drop_content {
+position: relative;
+width: 300px;
+height: 50px;
+padding: 0.4em;
+}
+#cal_drop h4 {
+margin: 0;
+padding: 0.4em;
+text-align: left;
+width: 300px;
+font-size: 11px;
+}
+
+#coordinate_drop_content {
+position: relative;
+width: 300px;
+height: 70px;
+padding: 0.4em;
+}
+#coordinate_drop h4 {
+margin: 0;
+padding: 0.4em;
+text-align: left;
+width: 300px;
+font-size: 11px;
+}
+
+/* #upgrade_via_file_upload_content {
+position: relative;
+width: 400px;
+height: 50px;
+padding: 0.4em;
+}
+#upgrade_via_file_upload_drop h4 {
+margin: 0;
+padding: 0.4em;
+text-align: left;
+width: 400px;
+font-size: 11px;
+}
+
+#upgrade_via_url_upload_content {
+position: relative;
+width: 400px;
+height: 30px;
+padding: 0.4em;
+}
+#upgrade_via_url_upload_drop h4 {
+margin: 0;
+padding: 0.4em;
+text-align: left;
+width: 400px;
+font-size: 11px;
+}
+ */
+
+/*********************************************/
+/* added to replace badges  
+/**********************************************/
+
+/* make sure the element has position: relative */
+[data-notifications] {
+    position: relative;
+}
+
+[data-notifications]:after {
+    content: attr(data-notifications);
+    position: absolute;
+    background: #fc950e;
+    border-radius: 100%;
+    display: inline-block;
+    padding: 0.3em;
+    color: white;
+    right: 0px;
+    top:-15px;
+}
+
+
+[dn] {
+    position: relative;
+}
+
+[dn]:after {
+    content: attr(dn);
+    position: absolute;
+    background: #fc950e;
+    border-radius: 100%;
+    display: inline-block;
+    padding: 0.3em;
+    color: white;
+    right: 0px;
+    top:-15px;
+}
+
+.mid {
+    vertical-align:middle
+}
+
+.uploadForm { display: block; margin: 20px auto; background: #eee; border-radius: 10px; padding: 15px }
+.uploadProgress { position:relative; width:400px; border: 1px solid #ddd; padding: 1px; border-radius: 3px; }
+.uploadBar { background-color: #B4F5B4; width:0%; height:20px; border-radius: 3px; }
+.uploadPercent { position:absolute; display:inline-block; top:3px; left:48%; }

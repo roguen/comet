@@ -1,0 +1,115 @@
+<!-- 
+//Copyright (c) 2015 Hitachi Data Systems, Inc.
+//All Rights Reserved.
+//
+//   Licensed under the Apache License, Version 2.0 (the "License"); you may
+//   not use this file except in compliance with the License. You may obtain
+//   a copy of the License at
+//
+//         http://www.apache.org/licenses/LICENSE-2.0
+//
+//   Unless required by applicable law or agreed to in writing, software
+//   distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+//   WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+//   License for the specific language governing permissions and limitations
+//   under the License.
+//
+//Package: COMET Web Application
+//Author: Chris Delezenski <chris.delezenski@hdsfed.com>
+//Compilation Date: 2015-05-06
+//License: Apache License, Version 2.0
+//Version: 1.21.0
+//(RPM) Release: 1
+//SVN: r554
+-->
+
+<h2>Data Ingestion</h2>
+
+<div id="INGESTwrapper">
+	<div id="INGEST_tabContainer" style="height: 690px;">
+		<div class="tabs">
+			<ul>
+				<li id="INGEST_tabHeader_1">Upload files to COMET</li>
+				<li id="INGEST_tabHeader_2">Track Ingestion Progress</li>
+			</ul> 
+		</div> <!-- tabs -->
+		<div class="tabscontent" style="height: 600px;">
+			<div class="tabpage" id="INGEST_tabpage_1">
+				 <!-- upload -->
+				<h2>Upload data to COMET for ingest</h2>
+				<div id="uploader_container">
+					<div id="uploader_filelist">No runtime found.</div>
+					<br />
+					<input type=button id="uploader_pickfiles" onclick="javascript:;" value="Select and Upload Files" />
+					<input type=button id="uploader_upfiles" onclick="javascript:;" value="Upload Files" style="display:none"/>
+				</div>
+				<!-- end of uploader container -->
+				<br /><br /><hr /><br /><br />
+				<div>Current Directory: <div id="selected_dir_name"></div></div>
+				<div class="dir_viewer">
+					<div id="fileTree" class="fileTree"></div>
+					<input type=button onclick='CometControlsReloadFileTree()' value="Refresh"/>
+					<input type=button onclick='CometControlsCreateDir()' value="+" />
+					<input type=button id="removeDir1" onclick='CometControlsRemoveDir()' value="-" />
+					<input type=button onclick='CometControlsUpDir()' value="Up" />
+					<div id="makeDir" style="display: none;">
+						Directory: <input type=text name="newdir_input" id="newdir_input" /><input type=button id="create_newdir" onclick='CometControlsCreateDir()' value="Create Directory" />
+					</div>
+					<!-- end of make dir -->
+					
+					<div id="removeDir" style="display: none; width: 700px">
+						File/Directory: <input class="span7" style="width: 400px;" type=text name="remove_item" id="remove_item" onchange='CheckRemoveBtn()' readonly="readonly" />
+						<input type=button id="removeDirBTN" onclick='CometControlsRemoveDir()' value="Remove File/Directory" />
+					</div>
+					<!-- end of rmdir -->
+				</div>		
+				<!-- end of dir_viewer -->
+			</div>
+			<!-- end of tab page 1  (upload) -->	
+				
+			<div class="tabpage" id="INGEST_tabpage_2"> <!-- tracker -->
+				<table><tr><td><h3>Ingest Tracking:</h3></td><td><span id=migration_src>Loading...</span></td><td>to</td><td><span id=migration_dest>Loading...</span></td></tr></table>
+				<table style="width: 750px; " class="table table-striped table-bordered table-condensed span9" >
+				<tr>
+				
+				<!--begin / stop ingest tracking,  pause/resume ingestor, stop ingestor, reload config -->
+				<td style="width: 200px;"><span id="ingest_button_span">Loading...</span></td>
+				<td style="width: 200px;"><span id="ingest_pause_button_span"><button id="pause_resume_button" onmousedown="CometControlsPauseIngestor()" >Pause Ingest</button></span></td>
+				<!--<td><button id="stop_button" onmousedown="CometControlsStopIngestor()" >Stop Ingest</button></td>-->
+				<!--<td><button id="reload_button" onmousedown="CometControlsReloadConfigIngestor()">Reload Config for Ingestor</button></td> -->
+				<!--<td><button id="flush_button" onmousedown="CometControlsFlushIngestorCache()">Flush Ingestor Cache</button></td>-->
+				<!--<td><button id="ingest_delete_cache_button" onmousedown="CometControlsDeleteIngestorCache()">Delete Ingestor Cache</button></td> -->
+				
+				</tr>
+				</table>
+				<br>
+				<table border=1 style="width: 750px; height: 400px" class="table table-striped table-bordered table-condensed span9" >
+					<thead>
+						<th>ID</th>
+						<th width=60%>File Path</th>
+						<th>File Length</th>
+						<th>File Ingest Start Time</th>
+					</thead>
+					<tbody id="ingestor_table"></tbody>
+				</table>
+				<table border=1 style="width: 750px">
+					<tbody id="ingestor_status"></tbody>
+				</table>
+			</div>
+			<!-- end of tab page 2  (tracker) -->	
+		</div>
+		<!-- end INGEST_tabContent -->	
+	</div>
+	<!-- end INGEST_tabContainer -->
+</div>
+<!-- end INGESTwrapper -->		
+											
+											
+
+													
+													
+											
+													
+												
+												
+					    <!-- end of tab page 5  (ingest) -->

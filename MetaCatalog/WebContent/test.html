@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Reflective Image Test</title>
+        <link rel="SHORTCUT ICON" href="favicon.ico"/>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/reflection.js"></script>
+	<script type="text/javascript">
+	jQuery(function($) {
+		$("img.reflect").reflect({/* Put custom options here */}); 
+	});
+
+	function MakeItSo() {
+		//doesn't work
+		//document.getElementById("imagecatcher").innerHTML='<img id=someimage class="reflect" src=http://www.digitalia.be/images/36.jpg>';
+	
+		//doesn't work either
+		//document.getElementById("imagecatcher").innerHTML='<img id=someimage src=http://www.digitalia.be/images/36.jpg>';
+		//$("someimage").reflect();
+
+		document.getElementById("imagecatcher").innerHTML='<img id=someimage class="reflect" src=http://www.digitalia.be/images/36.jpg   style="display: block; border: 0px;"  >';
+		$("img#someimage").reflect();
+		
+	}
+	</script>
+	
+	</head>
+	<body>
+		<!-- Works great -->
+		<img src=http://www.digitalia.be/images/36.jpg class="reflect" /><br /><hr />
+		
+		<!-- Doesn't work at all -->
+		<span id="imagecatcher" onmousedown="MakeItSo()">Put Another Image Here...</span>
+	</body>
+</html>
+
+
+
+

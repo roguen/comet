@@ -1,0 +1,303 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Hitachi COMET Vidcat Test</title>
+        <link rel="SHORTCUT ICON" href="favicon.ico"/>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+        <link rel="stylesheet" type="text/css" media="screen" href="css/hds-data-access-styles.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/hds-data-access-styles-additional.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/tabs.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/tooltip.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/jqueryFileTree.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/mediaelementplayer.min.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/prettify.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/ui-lightness/jquery-ui.min.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="css/styles.css"/>
+	
+
+	<!-- latest JQUERY -->
+	<script type="text/javascript" charset="utf-8" src="./js/jquery-2.0.3.min.js"></script>
+	<!-- latest JQUERY UI -->
+	<script type="text/javascript" charset="utf-8" src="./js/jquery.ui.core.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./js/jquery.ui.widget.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./js/jquery.ui.datepicker.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./js/jquery.ui.effect.min.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./js/jquery.ui.effect-blind.min.js"></script>
+
+
+
+	<script type="text/javascript" charset="utf-8" src="./js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./js/jQuery.validity.js"></script>
+	<script type="text/javascript" charset="utf-8" src="./js/jquery.form.js"></script>
+
+
+	<script type="text/javascript" charset="utf-8" src="js/plupload.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/plupload.html4.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/plupload.html5.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/jqueryFileTree.js"></script>
+
+<!-- begin word cloud thing -->
+<!-- jquery is broken	<script type="text/javascript" charset="utf-8" src="js/jquery.tagcanvas.min.js"></script> -->
+
+<script type="text/javascript" charset="utf-8" src="js/jquery.tagcanvas.min.js"></script>
+<!-- end word cloud thing -->
+
+
+<!-- media player -->
+	<script type="text/javascript" charset="utf-8" src="js/mediaelement-and-player.min.js"></script>
+<!-- end media player -->
+
+
+	<script type="text/javascript" charset="utf-8" src="./js/reflection.js"></script>
+	<script type="text/javascript" charset="utf-8" src="http://www.google.com/jsapi?key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw"></script>
+<!--	<script type="text/javascript" charset="utf-8" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDUCJndPhuq81XUhHUO5Yxtvzpb5pqaVsk&sensor=false"> </script> --> 
+
+
+	<script type="text/javascript" charset="utf-8" src="js/prettify.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/vkbeautify.0.99.00.beta.js"></script>
+	<script type="text/javascript">  var testing=true;  </script>
+
+	<script type="text/javascript" charset="utf-8" src="js/comet.js"></script>
+	<script type="text/javascript" charset="utf-8" src="js/comet_wip.js"></script>
+	<script type="text/javascript">
+	
+	
+	window.onload=function() {
+	
+		//console.log("get this far");
+		
+		
+		
+
+		//initialize google earth
+
+		//get properties from Java
+		//console.log("before qp");
+		CometControlsQueryProperties_NEW();
+		//console.log("after qp");
+
+
+		//initialize tabs
+		//InitTabs("LHS");
+		InitTabs("RHS");
+		InitTabs("INGEST");
+		cTabFliptoPage( "INGEST", 1 );
+		
+		//document.getElementById("metadataEditor").style.display="none"
+		
+	
+	//	CometRefreshLogs();
+		
+		
+		
+	}
+	jQuery(function($) {
+	$("img.reflect").reflect({/* Put custom options here */});
+});
+
+	</script>
+	
+	
+	</head>
+	<body>
+		<!-- tooltip java script includes, must be in body -->
+		<script src="js/wz_tooltip.js" type="text/javascript"></script>
+		
+		<div id="mainContent">
+			<!-- Main Header -->
+			<div class="mainHeader">
+			</div>
+		
+			<div class="bodyContent">
+              	
+				<div class="bodyWrap">
+					<center>
+					<div id="hide_iframe"><iframe name="iframe" id="iframe" style="border: 0px;"></iframe></div>
+					<table border=1 id="main_table">
+						<tr>
+							<td colspan=2 ><center><div><span id="caveat_top">Loading...</span></div></center></td>
+						
+						</tr>
+					
+						<tr>
+							<td>
+
+							<!-- Column 1 -->
+							 <div id="RHSwrapper">
+								<div id="RHS_tabContainer" style="height: 770px; width: 1150px;">
+								
+									<div class="tabs">
+      										<ul>
+											<li id="RHS_tabHeader_1">Data Ingestion</li>
+										</ul> 
+									</div> <!-- RHS tabs -->
+									
+									<!-- 70 pixels shorter than tabcontainer -->
+									<div class="tabscontent" style="height: 700px;">
+										<div class="tabpage" id="RHS_tabpage_1">
+										
+										
+<!-- copy and paste from here -->										
+										
+											<h2>Data Ingestion</h2>
+											<div id="INGESTwrapper">
+											<div id="INGEST_tabContainer" style="height: 690px;  width: 1000px;">
+												<div class="tabs">
+													<ul>
+														<li id="INGEST_tabHeader_1">Upload files to COMET</li>
+														<li id="INGEST_tabHeader_2">Track Ingestion Progress</li>
+													</ul> 
+												</div> <!-- tabs -->
+												<div class="tabscontent" style="height: 600px;">
+												<div class="tabpage" id="INGEST_tabpage_1">
+												 <!-- upload -->
+													<h2>Upload data to COMET for ingest</h2>
+												
+												
+												
+													<div id="uploader_container">
+														
+														<div id="uploader_filelist">No runtime found.</div>
+														<br />
+														
+														<input type=button id="uploader_pickfiles" onclick="javascript:;" value="Select Files" />
+														<input type=button id="uploader_upfiles" onclick="javascript:;" value="Upload Files" />
+														
+														
+													</div>
+													<br /><br /><hr /><br /><br />
+													<div>Current Directory: <div id="selected_dir_name"></div></div>
+													<div class="dir_viewer">
+														
+														<div id="fileTree" class="fileTree"></div>
+														<input type=button onclick='CometControlsReloadFileTree()' value="Refresh"/>
+														<input type=button onclick='CometControlsCreateDir()' value="+" />
+														<input type=button id="removeDir1" onclick='CometControlsRemoveDir()' value="-" />
+														<input type=button onclick='CometControlsUpDir()' value="Up" />
+														
+														
+														<div id="makeDir" style="display: none;">
+															Directory: <input type=text name="newdir_input" id="newdir_input" />
+															<input type=button id="create_newdir" onclick='CometControlsCreateDir()' value="Create Directory" />
+														</div>
+														<div id="removeDir" style="display: none; width: 700px">
+															File/Directory: <input class="span7" style="width: 400px;" type=text name="remove_item" id="remove_item" onchange='CheckRemoveBtn()' readonly="readonly" />
+															<input type=button id="removeDirBTN" onclick='CometControlsRemoveDir()' value="Remove File/Directory" />
+														</div>
+														
+														
+														
+													</div>		
+													
+												
+												
+												
+												</div> 	 <!-- end of tab page 1  (upload) -->	
+												<div class="tabpage" id="INGEST_tabpage_2"> <!-- tracker -->
+												
+												
+												
+													<h2>Ingestion Tracker</h2>
+													
+													
+													
+													
+												
+												
+												
+												<span id="ingest_button_span">Loading...</span>
+												
+												
+												<br>
+												
+												<table border=1 style="width: 750px; height: 400px" class="table table-striped table-bordered table-condensed span9" >
+													<thead>
+														<th>ID</th>
+														<th width=60%>File Path</th>
+														<th>File Length</th>
+														<th>Ingest Start Time</th>
+													</thead>
+													<tbody id="ingestor_table"></tbody>
+												</table>
+												
+												<table border=1 style="width: 750px">
+												<tbody id="ingestor_status"></tbody>
+												
+												</table>
+													
+													
+												
+												
+												
+												
+													
+													
+													
+													
+													
+													
+													
+												</div> <!-- end of tab page 2  (tracker) -->	
+											</div><!-- end INGEST_tabContent -->										
+											</div><!-- end INGEST_tabContainer -->										
+											</div><!-- end INGESTwrapper -->		
+											
+											
+<!-- copy and paste to here -->										
+																			
+										</div> <!-- end RHS_tabpage_1 (logs) -->
+									</div> <!--end tabscontent -->
+								</div> <!--end RHS tab container -->
+							</div> <!--end RHS wrapper -->
+							
+	
+							</td>					
+
+						</tr>
+						<tr>
+							<td colspan=2 ><center><span id="caveat_bottom">Loading...</span></center></td>
+						
+						</tr>
+
+					</table>
+					
+					</center>
+                </div> <!-- wrapper -->
+		
+                		<!-- <div class="clear">&nbsp;</div> -->
+            		</div> <!-- body wrap?? -->
+			
+			<!-- Right Navigation -->
+        		<div id="rightNavWrap">
+				
+	                <ul id="rightNav" class="sf-menu">
+                    		<li >
+			    	<table><tr><td style="width=30px;"><div id="loaderImage"></div></td><td><img src="images/icon-user.png" /></td><td><span id="loggedin_user"></span> |</td><td>
+			    	<span id="logoutBtn" type="submit" onclick='CometControlsLogoutBTN()' style="cursor:pointer">Sign Out</span></td></tr></table>
+			    </li>
+                	</ul>
+            		</div> <!--- rightNavWrap -->
+
+		        <!-- Main Footer -->
+        		<div id="mainFooter">
+                		<div class="softwareInfo">
+                			<table><tr><td>
+		                		<div>Installed COMET Version: <span id="installed-comet-version" style="font-weight: bold;">Loading...</span></div>
+        					</td>
+        					
+        					<td>        			
+		                		<div id="google_plugin">Installed Plugin Version: <span id="installed-plugin-version" style="font-weight: bold;">Loading...</span></div>
+                			</td></tr></table>
+                		</div>
+                		<div class="copyright">&copy; 2013 Hitachi Data Systems Federal Corporation. All rights reserved.</div>
+		        </div>
+			
+			
+		</div><!-- mainContent -->
+		<!-- Extra Floating Divs -->
+        	<div class="column" style="left: 0px;"><div id="leftcol">&nbsp;</div></div>
+		<div class="column" style="right: 0px;"><div id="rightcol">&nbsp;</div></div> 
+	</body>
+</html>
+

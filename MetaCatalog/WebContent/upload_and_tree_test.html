@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Hitachi COMET Search Interface</title>
+        <link rel="SHORTCUT ICON" href="favicon.ico"/>
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+
+        <link rel="stylesheet" type="text/css" media="screen" href="css/hds-data-access-styles.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/hds-data-access-styles-additional.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/tabs.css"/>
+        <link rel="stylesheet" type="text/css" media="screen" href="css/tooltip.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/styles.css"/>
+	<link rel="stylesheet" type="text/css" media="screen" href="css/jqueryFileTree.css" />
+	
+<style type="text/css">
+			BODY,
+			HTML {
+				padding: 0px;
+				margin: 0px;
+			}
+			BODY {
+				font-family: Verdana, Arial, Helvetica, sans-serif;
+				font-size: 11px;
+				background: #EEE;
+				padding: 15px;
+			}
+			
+			H1 {
+				font-family: Georgia, serif;
+				font-size: 20px;
+				font-weight: normal;
+			}
+			
+			H2 {
+				font-family: Georgia, serif;
+				font-size: 16px;
+				font-weight: normal;
+				margin: 0px 0px 10px 0px;
+			}
+			
+			.example {
+				float: left;
+				margin: 15px;
+			}
+			
+			.demo {
+				width: 200px;
+				height: 400px;
+				border-top: solid 1px #BBB;
+				border-left: solid 1px #BBB;
+				border-bottom: solid 1px #FFF;
+				border-right: solid 1px #FFF;
+				background: #FFF;
+				overflow: scroll;
+				padding: 5px;
+			}
+			
+		</style>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.dataTables.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jQuery.validity.js"></script>
+<!--	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.reflection.js"></script> -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/jquery.form.js"></script>
+
+
+<!--added for upload capability -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/plupload.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/plupload.html4.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/plupload.html5.js"></script>
+<!--end upload capability -->
+
+
+<!--begin file tree capability -->
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/jqueryFileTree.js"></script>
+<!--end file tree capability -->
+
+
+	<script type="text/javascript" charset="utf-8" language="javascript" src="./js/reflection.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript"
+src="http://www.google.com/jsapi?key=ABQIAAAAuPsJpk3MBtDpJ4G8cqBnjRRaGTYH6UMl8mADNa0YKuWNNa8VNxQCzVBXTx2DYyXGsTOxpWhvIG7Djw"></script>
+<!--	<script type="text/javascript" charset="utf-8" language="javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyDUCJndPhuq81XUhHUO5Yxtvzpb5pqaVsk&sensor=false"> </script> --> 
+
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/comet.js"></script>
+	<script type="text/javascript" charset="utf-8" language="javascript" src="js/comet_alt.js"></script>
+	<script type="text/javascript">
+	
+	
+	window.onload=function() {
+	
+		//console.log("get this far");
+		
+		
+		
+
+		//initialize google earth
+
+		//get properties from Java
+		//console.log("before qp");
+		CometControlsQueryProperties_alt();
+		
+		console.log("after qp_alt");
+
+
+		//initialize tabs
+		InitTabs("LHS");
+		//InitTabs("RHS");
+		
+		//document.getElementById("metadataEditor").style.display="none"
+		CometControlsInitializeUploader();
+		
+		
+		$(document).ready( function() {
+				CometControlsReloadFileTree();
+			});
+		
+		
+	}
+	jQuery(function($) {
+	$("img.reflect").reflect({/* Put custom options here */});
+});
+
+	</script>
+	
+	
+	</head>
+	<body>
+		<!-- tooltip java script includes, must be in body -->
+		<script src="js/wz_tooltip.js" type="text/javascript"></script>
+		
+		<div id="mainContent">
+			<!-- Main Header -->
+			<div class="mainHeader">
+-			</div>
+		
+			<div class="bodyContent">
+              	
+				<div class="bodyWrap">
+					<center>
+					<div id="hide_iframe"><iframe name="iframe" id="iframe" style="border: 0px;"></iframe></div>
+					<table border=0 id="main_table">
+						<tr>
+							<td colspan=2 ><center><div><span id="caveat_top">Loading...</span></div></center></td>
+						
+						</tr>
+					
+						<tr>
+							<td>
+
+							<!-- Column 1 -->
+							 <div id="LHSwrapper">
+								<div id="LHS_tabContainer" style="height: 770px; width: 1150px;">
+									<div class="tabs">
+      										<ul>
+											<li id="LHS_tabHeader_1">Upload And Tree Test</li>
+										</ul> 
+									</div> <!-- LHS tabs -->
+									
+									<!-- 70 pixels shorter than tabcontainer -->
+									<div class="tabscontent" style="height: 700px;">
+											<div class="tabpage" id="LHS_tabpage_1">
+											        <h2>Upload And Tree Test - Future Ingestor widgets</h2>
+												
+												
+												
+<div id="uploader_container">
+    <div id="uploader_filelist">No runtime found.</div>
+    <br />
+    <a id="uploader_pickfiles" href="javascript:;">[Select files]</a> 
+    <a id="uploader_upfiles" href="javascript:;">[Upload files]</a>
+</div>
+
+												
+												
+<br /><br />												
+												
+<hr /><br /><br />
+
+												
+												
+												
+												
+												
+<div class="example">
+			<div id="selected_dir_name">Loading...</div>
+			<div id="fileTreeDemo_1" class="demo"></div>
+			
+			<span onclick='CometControlsReloadFileTree()'>Refresh</span>
+</div>												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+												
+											</div>
+									</div>
+								</div>
+							</div>
+							</td>					
+
+						</tr>
+						<tr>
+							<td colspan=2 ><center><span id="caveat_bottom">Loading...</span></center></td>
+						
+						</tr>
+
+					</table>
+					
+					</center>
+                </div> <!-- wrapper -->
+		
+                		<!-- <div class="clear">&nbsp;</div> -->
+            		</div> <!-- body wrap?? -->
+			
+			<!-- Right Navigation -->
+        		<div id="rightNavWrap">
+				
+	                <ul id="rightNav" class="sf-menu">
+                    		<li >
+			    	<table><tr><td style="width=30px;"><div id="loaderImage"></div></td><td><img src="images/icon-user.png" /></td><td><span id="loggedin_user"></span> |</td><td>
+			    	<span id="logoutBtn" type="submit" onclick='CometControlsLogoutBTN()' style="cursor:pointer">Sign Out</span></td></tr></table>
+			    </li>
+                	</ul>
+            		</div> <!--- rightNavWrap -->
+
+		        <!-- Main Footer -->
+        		<div id="mainFooter">
+                		<div class="softwareInfo">
+                			<table><tr><td>
+		                		<div>Installed COMET Version: <span id="installed-comet-version" style="font-weight: bold;">Loading...</span></div>
+        					</td>
+        					
+        					<td>        			
+		                		<div id="google_plugin">Installed Plugin Version: <span id="installed-plugin-version" style="font-weight: bold;">Loading...</span></div>
+                			</td></tr></table>
+                		</div>
+                		<div class="copyright">&copy; 2013 Hitachi Data Systems Federal Corporation. All rights reserved.</div>
+		        </div>
+			
+			
+		</div><!-- mainContent -->
+		<!-- Extra Floating Divs -->
+        	<div class="column" style="left: 0px;"><div id="leftcol">&nbsp;</div></div>
+		<div class="column" style="right: 0px;"><div id="rightcol">&nbsp;</div></div> 
+	</body>
+</html>
+
