@@ -20,7 +20,7 @@
 # License: Apache License, Version 2.0
 # Version: 1.21.0
 # (RPM) Release: 1
-# SVN: r551+
+# SVN: r554
 
 export LIBS="commons-codec-1.6.jar commons-logging-1.1.1.jar HCPHelpersForJava.jar HDSCometHLApi.jar httpclient-4.2.5.jar httpcore-4.2.4.jar im4java-1.4.0.jar jackson-all-1.6.1.jar jedis-2.1.0.jar jid3lib-0.5.4.jar json-lib-2.3-jdk15.jar sqlite-jdbc-3.7.2.jar"
 

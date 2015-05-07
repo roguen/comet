@@ -19,7 +19,7 @@
 //License: Apache License, Version 2.0
 //Version: 1.21.0
 //(RPM) Release: 1
-//SVN: r551+
+//SVN: r554
 
 //NOTE: this code was originally developed by Cliff Grimm <clifford.grimm@hds.com>
 
@@ -41,7 +41,7 @@ import com.hdsfed.cometapi.ThreadTrackerDB;
 public class IngestorMain {
 	private static final String VERSION ="1.21.0";
 	private static final String COMPILE_DATE ="2015-05-06";
-	private static final String SVN ="551+";
+	private static final String SVN ="554";
 
 	//TODO: eventually, merge these two together.
 	//private static Logger logger = Logger.getLogger(IngestorMain.class.getPackage().getName());

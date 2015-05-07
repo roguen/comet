@@ -19,7 +19,7 @@
 //License: Apache License, Version 2.0
 //Version: 1.21.0
 //(RPM) Release: 1
-//SVN: r551+
+//SVN: r554
  
 using namespace std;
 
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
 		cout<<"License: Apache License, Version 2.0"<<endl;
 		cout<<"Version: 1.21.0"<<endl;
 		cout<<"(RPM) Release: 1"<<endl;
-		cout<<"SVN: 551+r"<<endl;
+		cout<<"SVN: 554r"<<endl;
 		exit(0);
 	}
 	cKeyboard kybd;

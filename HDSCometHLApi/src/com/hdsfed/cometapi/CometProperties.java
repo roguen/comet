@@ -19,7 +19,7 @@
 //License: Apache License, Version 2.0
 //Version: 1.21.0
 //(RPM) Release: 1
-//SVN: r551+
+//SVN: r554
 package com.hdsfed.cometapi;
 
 import java.io.File;
@@ -50,7 +50,7 @@ import com.hds.hcp.apihelpers.HCPUtils;
 public class CometProperties {
 	private static final String VERSION ="1.21.0";
 	private static final String COMPILE_DATE ="2015-05-06";
-	private static final String SVN ="551+";
+	private static final String SVN ="554";
 
 	private static final String defaultAnnotation="default";
 	private static final String installDirectory="/opt/COMETDist/";

@@ -20,6 +20,6 @@
 # License: Apache License, Version 2.0
 # Version: 1.21.0
 # (RPM) Release: 1
-# SVN: r551+
+# SVN: r554
 
 comet_ingestor.sh &

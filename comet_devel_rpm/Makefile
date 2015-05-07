@@ -19,7 +19,7 @@
 # License: Apache License, Version 2.0
 # Version: 1.21.0
 # (RPM) Release: 1
-# SVN: r551+
+# SVN: r554
 
 PWD=$(shell pwd)
 VER=$(shell cometdev_getvar.sh version)
@@ -97,9 +97,9 @@ gitexport:
 	cometdev_sed.sh in $(GITDIR)/comet_devel_rpm/
 	cp -avpf custom/LICENSE $(GITDIR)/comet_devel_rpm/
 	cp -avpf *template* $(GITDIR)/comet_devel_rpm/
-	svn export custom $(GITDIR)/comet_devel_rpm/custom
-	svn export ver $(GITDIR)/comet_devel_rpm/ver
-	svn export doc $(GITDIR)/comet_devel_rpm/doc
+	#svn export custom $(GITDIR)/comet_devel_rpm/custom
+	#svn export ver $(GITDIR)/comet_devel_rpm/ver
+	#svn export doc $(GITDIR)/comet_devel_rpm/doc
 
 unlink:
 	sudo rm -rf /usr/bin/cometdev_antbuild.sh

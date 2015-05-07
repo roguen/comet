@@ -19,7 +19,7 @@
 # License: Apache License, Version 2.0
 # Version: 1.21.0
 # (RPM) Release: 1
-# SVN: r551+
+# SVN: r554
 PROGRAM=MetaCatalog
 WAR=ROOT.war
 PWD=$(shell pwd)
@@ -169,7 +169,7 @@ gitexport: clean
 
 	cp -avpf $(PREFIX)/devel/custom/LICENSE $(GITDIR)/MetaCatalog/
 
-	svn export WebContent $(GITDIR)/MetaCatalog/WebContent
+#	svn export WebContent $(GITDIR)/MetaCatalog/WebContent
 	rm -rf $(GITDIR)/MetaCatalog/WebContent/*.html
 	rm -rf $(GITDIR)/MetaCatalog/WebContent/js/comet.js
 	rm -rf $(GITDIR)/MetaCatalog/WebContent/js/comet*.js

@@ -20,10 +20,10 @@
 # License: Apache License, Version 2.0
 # Version: 1.21.0
 # (RPM) Release: 1
-# SVN: r551+
+# SVN: r554
 
 export THIS_SCRIPT_VERSION=1.21.0
-export THIS_SCRIPT_SVN=551+
+export THIS_SCRIPT_SVN=554
 
 echo "Version of this script's package: ${THIS_SCRIPT_VERSION} svn:r${THIS_SCRIPT_SVN}"
 echo 

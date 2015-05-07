@@ -19,7 +19,7 @@
 //License: Apache License, Version 2.0
 //Version: 1.21.0
 //(RPM) Release: 1
-//SVN: r551+
+//SVN: r554
 package ingestor.walkers;
 
 
@@ -35,7 +35,7 @@ import com.hdsfed.cometapi.ThreadTrackerDB;
 public class DefaultWalker extends BaseWalker {
 	private static final String VERSION ="1.21.0";
 	private static final String COMPILE_DATE ="2015-05-06";
-	private static final String SVN ="551+";
+	private static final String SVN ="554";
 	private static ExtendedLogger ScreenLog = new ExtendedLogger(DefaultWalker.class.getName());
 
 	// Local member variables.
