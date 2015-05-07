@@ -1,0 +1,8 @@
+/var/log/comet/catalina.out {  
+ copytruncate  
+ daily  
+ rotate 7  
+ compress  
+ missingok  
+ size 5M  
+}  

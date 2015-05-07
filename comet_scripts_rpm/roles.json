@@ -1,0 +1,6 @@
+[{ "role" : "general", "show_caveats" : false, "classification" : "", "admin" : false, "search_criteria" : "", "ingest":true, "notes":true, "fallback": "", "lhspf":-1, "rhspf":-1 },
+{ "role" : "admin", "show_caveats" : false, "classification" : "", "admin" : true, "search_criteria" : "", "ingest":true, "notes":true, "fallback": "System Monitor", "lhspf":2, "rhspf":7 },
+{ "role" : "System Monitor", "show_caveats" : false, "classification" : "", "admin" : true, "search_criteria" : "", "ingest":true, "notes":true, "fallback": "", "lhspf":2, "rhspf":6 },
+{ "role" : "Commercial", "show_caveats" : false, "classification" : "", "admin" : true, "search_criteria" : "-(detailsCaveat:SECRET)", "ingest":false, "notes":false, "fallback": "", "lhspf":-1, "rhspf":-1 },
+{ "role" : "SECRET", "show_caveats" : true, "classification" : "SECRET", "admin" : true, "search_criteria" : "+(detailsCaveat:SECRET) -(detailsCaveat:TOP*)", "ingest":false, "notes":false, "fallback": "", "lhspf":-1, "rhspf":-1 },
+{ "role" : "TS/SCI", "show_caveats" : true, "classification" : "TOP SECRET", "admin" : true, "search_criteria" : "(detailsCaveat:TOP*) (detailsCaveat:SECRET)", "ingest":false, "notes":false, "fallback": "", "lhspf":-1, "rhspf":-1 }]

@@ -1,0 +1,288 @@
+##  
+## Source file configuration for COMET.
+## Author: Chris Delezenski <chris.delezenski@hdsfed.com>
+## License: Apache License, Version 2.0
+##
+## Date: 2015-05-06
+## Version: 1.21.0
+
+# [Required] Local absolute path to the directory that contains the data to ingest. 
+#   Note: The last directory of source.path will be considered part of the path created on HCP, if multiple paths are used
+source.path=/opt/COMETDist/InputDir
+
+# If true, none of the settings intended for a r/w filesystem will be active
+# effectively, this setting (as true) will disable exeucte.*delete, unzip-in-place and file locking
+# [default: the source filesystem is writable ]
+source.readonly=false
+
+ingestor.useFileProcessCache=true
+
+
+##
+## HCP Destination information 
+##
+
+# [Required] HCP Data Access User to use for ingest.
+destination.user=comet
+
+	
+# [Required] Root Path REST URL to HCP to place content. 
+# Note:  This must be properly URL encoded.  That is any spaces or special characters,
+#        must be encoded in UTF-8 form.
+
+destination.hcp_namespace=data
+destination.hcp_config_namespace=config
+destination.hcp_tenant=comet
+destination.hcp_name=hcp
+destination.domain=domain.com
+
+
+#default is false
+destination.autoLoginEnabled=false
+
+#default is same as destination.user
+destination.autoLoginUser=__USER__
+
+#default is general
+destination.autoLoginRole=general
+
+
+##
+## HDDS Integration information 
+##
+
+#enable HDDS GUI integration
+# [ Default: true ]
+hdds.enabled=false
+
+# username for HDDS, assumed to be same as HCP, but may not be
+# [ Default: set at install time to use HCP's username ]
+hdds.user=__USER__
+
+# System name for HDDS (assuming HCP is on the same domain)
+# [ Default: set at install time ]
+hdds.name=hdds.domain.com
+
+# password for HDDS, base64 encoded
+# set at install time
+##hdds.password=__HDDS_PASSWORD__
+
+##
+## Metadata Generation Module information
+##
+
+# [Required] Comma separated list of class(es) to load to extract metadata from files.
+metadata.classes=.DummyGenerator(details),.BasicFileInfoGenerator(basic),.JNIFileInfoGenerator(geo),.ThumbnailMetadata(thumbnail),.DummyGenerator(path),.DummyGenerator(wordfreq),.DummyGenerator(datetime),.MP3InfoGenerator(mp3),.TaglistGenerator(taglist),.DeleteUnused(aux),.DeleteUnused(action),.DeleteUnused(detail),.NoteGenerator(note),.ContentGenerator(content),.FilenameParseGenerator(filename),.VideoTranscoder(ffmpeg)
+
+# CSV containing all the ingest directories on top of source.path that should not be skipped (for general ingest)
+# this setting is for internal testing
+# [Default: none, ingest everything]
+#metadata.skipAllButDirList=
+
+# CSV containing all the ingest directories on top of source.path that should not be skipped (for metadata, but not general ingest)
+# this setting is for internal testing
+# [Default: none, ingest everything]
+#metadata.skipMetadataDirList=
+
+# Enable to ingest only files and skip metadata extraction
+# [Default: false]
+metadata.skip=false
+
+# change to true for classic mode: stop checking classes on first hit
+# [Default: false]
+metadata.stopOnHit=false
+
+# super annotation for all other annotations combined
+# [Default: default ]
+# metadata.combinedAnnotation=default
+
+# Ingestor will automatically combine all found annotations into the annotation referenced by combinedAnnotation
+# [Default: true]
+metadata.shouldCombineAnnotations=true
+
+# Optional comma separated list of native libraries to load for metadata extraction processing
+# by the above class files.
+metadata.nativelibs=
+
+
+##
+## Post Processing Parameters.
+##
+
+# enable post process cycle
+postprocess.enabled=true
+# classes to process
+#postprocess.classes=.HaltPostProcessor,.ExternalScriptPostProcessor(/path/to/script.sh),.TimePostProcessor(60)
+postprocess.classes=.TimePostProcessor(10)
+
+
+##
+## General Execution Parameters.
+##
+
+# Unzip archive files prior to ingest
+# [Default: true]
+execution.unzip=true
+
+# Name of file in process local directory to watch for to indicate to stop processing
+#  [Default: ingestor.stop]
+#execution.stopRequestFile=ingestor.stop
+
+# Name of file on local machine to watch for to indicate to stop processing.
+#  For as long as file exists, the program will be paused. Delete the file to resume.
+#  Changing this value while program is in the paused state will not cause the new
+#  value to be used until resumed.
+#  [Default: ingestor.pause]
+#execution.pauseRequestFile=ingestor.pause
+
+# Indicate whether the source files should be deleted after written to HCP.
+# [Default: true]
+execution.deleteSourceFiles=true
+
+# Indicate whether the source file permissions should be forced to be deleted by changing
+#   the source file permissions.
+#   [Default: true]
+execution.forceDeleteSourceFiles=true
+
+# Indicate whether the empty directories in the source files should be periodically cleaned up
+#  [Default: true]
+execution.deleteSourceEmptyDirs=true
+
+# Indicate whether custom metadata should be updated for existing objects in HCP. [Default: false]
+#   If set to false, source files will be ignored (but deleted if indicated).
+execution.updateMetadata=true
+
+# Indicate whether existing Custom Metadata should be removed for an object already on HCP
+#   if the CM generator(s) do not produce any custom metadata. [Default: false]
+#execution.deleteExistingMetadataOnEmpty=false
+
+# Number of seconds to sleep during pause for between checks for resume. [Default: 10]
+execution.pauseSleepInSeconds=10
+
+# Number of seconds to sleep at end of batch run before attempting another batch. [Default: 60]
+execution.loopSleepInSeconds=60
+
+# Indicate whether HTTP headers should be written to the console (stdout) [Default: false]
+execution.debugging.httpheaders=true
+
+# Indicate whether ingestor should employ file locking on read (requires writable datasource)
+# [Default: true]
+execution.useFileLocking=true
+
+# Indicates the number of threads to employ while ingesting; up to 10 supported
+# [Default: 10]
+execution.maxThreads=10
+
+
+
+
+##
+## User Interface Parameters.
+##
+
+# show caveats in the UI
+# [Default: false]
+showCaveats=false
+
+# Path (on HCP, in the current namespace/tenant) of the default word cloud to automatically load
+# if not set, no cloud will be loaded
+# [Default: /WordClouds/scenarios.html ]
+wordCloud.contents=/WordClouds/scenarios.html
+
+verbose=true
+
+# software build info, stamped by build process
+comet.version=1.21.0
+comet.date=2015-05-06
+
+# maximum number of search results to process
+# [Default: 200 ]
+maxsearchresults=200
+
+# maximum number of search results to process
+# [Default: UNCLASSIFIED ]
+classification=UNCLASSIFIED
+
+# [Required] Comma separated list of user(s) that are allowed admin access
+# [Default: __USER__ and root ]
+multiuser.admins=__USER__,root
+
+
+# Comma separated list of date search parameters for the data range search capability
+# arguments should be valid MQE DATE elements (see your content class for details) or one of the following system metadata elements:
+# ingestTime - when the object was ingested
+# accessTime - when the object was last accessed (see HCP documentation)
+# changeTimeMilliseconds - when the object was last changed (see HCP documentation)
+search.dateList.mustHave=detailUpgradeDate
+search.dateList.couldHave=
+search.dateList.mustNotHave=
+search.constraints=
+
+# default true
+search.reverseLookup=true
+
+
+# Show the login banner warning users to accept terms in order to use the UI
+# [Default: true ]
+banner=true
+
+# Enable the ingestor service
+# [Default: true ]
+ingestor.enabled=true
+
+# maximum files to track
+# [Default: 10000 ]
+ingestor.maxFiles=10000
+
+# minutes to pause after connectivity to HCP
+# [Default: 2 minutes ]
+ingestor.hcpFailDelay=2
+
+
+# [ Default : false ] 
+ingestor.alwaysUsePrefix=false
+
+# [ Default : false ]
+ingestor.useSortPreferences=false
+
+# [ Default: * indicating that no special sorting will occur
+#ingestor.sortPreferences=startWith:goesfirst,*,endsWith:.last
+
+# System name of COMET
+# [Default: comet ]
+comet.name=comet.domain.com
+
+# Internal transfer of data should make use of https wherever possible
+# default is true
+gui.secureXfer=true
+
+# The following has to do with UI logging
+#handlers= java.util.logging.ConsoleHandler
+handlers= java.util.logging.FileHandler, java.util.logging.ConsoleHandler
+.level= INFO
+java.util.logging.FileHandler.level = FINEST
+java.util.logging.FileHandler.pattern = /var/log/comet/Ingestor%u.log
+#java.util.logging.FileHandler.pattern = %h/java%u.log
+#java.util.logging.FileHandler.limit = 50000
+java.util.logging.FileHandler.count = 5
+#java.util.logging.FileHandler.formatter = java.util.logging.XMLFormatter
+java.util.logging.FileHandler.formatter = java.util.logging.SimpleFormatter
+# Limit the message that are printed on the console to INFO and above.
+java.util.logging.ConsoleHandler.level = WARNING
+java.util.logging.ConsoleHandler.formatter = java.util.logging.SimpleFormatter
+############################################################
+# Facility specific properties.
+# Provides extra control for each logger.
+############################################################
+#com.hds.hcp.poc.level = FINE
+
+#ingestor.pollFrequency=100
+#ingestor.heartbeat.timing=5
+
+
+comet.geoDriver=google_earth
+
+ui.webapp.path=/
+
+
+
