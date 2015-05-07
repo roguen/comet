@@ -1,0 +1,296 @@
+# For the curious:
+# 0.9.5a soversion = 0
+# 0.9.6  soversion = 1
+# 0.9.6a soversion = 2
+# 0.9.6c soversion = 3
+# 0.9.7a soversion = 4
+# 0.9.7ef soversion = 5
+# 0.9.8ab soversion = 6
+# 0.9.8g soversion = 7
+# 0.9.8jk + EAP-FAST soversion = 8
+# 1.0.0 soversion = 10
+%define soversion 10
+
+# Number of threads to spawn when testing some threading fixes.
+%define thread_test_threads %{?threads:%{threads}}%{!?threads:1}
+
+# Arches on which we need to prevent arch conflicts on opensslconf.h, must
+# also be handled in opensslconf-new.h.
+%define multilib_arches %{ix86} x86_64
+
+Summary: A general purpose cryptography library with TLS implementation
+Name: openssl
+Version: __VERSION__
+Release: __RELEASE__%{?dist}.7
+# We have to remove certain patented algorithms from the openssl source
+# tarball with the hobble-openssl script which is included below.
+# The original openssl upstream tarball cannot be shipped in the .src.rpm.
+Source: openssl-%{version}.tar.gz
+
+
+
+License: OpenSSL
+Group: System Environment/Libraries
+URL: http://www.openssl.org/
+BuildRoot: %{_tmppath}/%{name}-%{version}-root
+BuildRequires: coreutils, krb5-devel, perl, sed, zlib-devel, /usr/bin/cmp
+BuildRequires: /usr/bin/rename
+Requires: coreutils, make
+Requires: ca-certificates >= 2008-5
+
+%description
+The OpenSSL toolkit provides support for secure communications between
+machines. OpenSSL includes a certificate management tool and shared
+libraries which provide various cryptographic algorithms and
+protocols.
+
+%package devel
+Summary: Files for development of applications which will use OpenSSL
+Group: Development/Libraries
+Requires: %{name} = %{version}-%{release}, krb5-devel, zlib-devel
+Requires: pkgconfig
+
+%description devel
+OpenSSL is a toolkit for supporting cryptography. The openssl-devel
+package contains include files needed to develop applications which
+support various cryptographic algorithms and protocols.
+
+%package static
+Summary:  Libraries for static linking of applications which will use OpenSSL
+Group: Development/Libraries
+Requires: %{name}-devel = %{version}-%{release}
+
+%description static
+OpenSSL is a toolkit for supporting cryptography. The openssl-static
+package contains static libraries needed for static linking of
+applications which support various cryptographic algorithms and
+protocols.
+
+%package perl
+Summary: Perl scripts provided with OpenSSL
+Group: Applications/Internet
+Requires: perl
+Requires: %{name} = %{version}-%{release}
+
+%description perl
+OpenSSL is a toolkit for supporting cryptography. The openssl-perl
+package provides Perl scripts for converting certificates and keys
+from other formats to the formats used by the OpenSSL toolkit.
+
+%prep
+%setup -q -n %{name}-%{version}
+
+
+
+sed -i 's/SHLIB_VERSION_NUMBER "1.0.0"/SHLIB_VERSION_NUMBER "%{version}"/' crypto/opensslv.h
+
+# Modify the various perl scripts to reference perl in the right location.
+perl util/perlpath.pl `dirname %{__perl}`
+
+# Generate a table with the compile settings for my perusal.
+touch Makefile
+make TABLE PERL=%{__perl}
+
+%build
+# Figure out which flags we want to use.
+# default
+sslarch=%{_os}-%{_target_cpu}
+%ifarch %ix86
+sslarch=linux-elf
+if ! echo %{_target} | grep -q i686 ; then
+	sslflags="no-asm 386"
+fi
+%endif
+%ifarch sparcv9
+sslarch=linux-sparcv9
+sslflags=no-asm
+%endif
+%ifarch sparc64
+sslarch=linux64-sparcv9
+sslflags=no-asm
+%endif
+%ifarch alpha alphaev56 alphaev6 alphaev67
+sslarch=linux-alpha-gcc
+%endif
+%ifarch s390 sh3eb sh4eb
+sslarch="linux-generic32 -DB_ENDIAN"
+%endif
+%ifarch s390x
+sslarch="linux64-s390x"
+%endif
+%ifarch %{arm}
+sslarch=linux-armv4
+%endif
+%ifarch sh3 sh4
+sslarch=linux-generic32
+%endif
+%ifarch ppc64
+sslarch=linux-ppc64
+%endif
+
+# ia64, x86_64, ppc are OK by default
+# Configure the build tree.  Override OpenSSL defaults with known-good defaults
+# usable on all platforms.  The Configure script already knows to use -fPIC and
+# RPM_OPT_FLAGS, so we can skip specifiying them here.
+#./Configure
+./config \
+	--prefix=%{_prefix} --openssldir=%{_sysconfdir}/pki/tls ${sslflags} \
+	zlib enable-camellia enable-seed enable-tlsext enable-rfc3779 \
+	enable-cms enable-md2 no-mdc2 no-rc5 no-ec2m no-gost no-srp \
+	--with-krb5-flavor=MIT  \
+	--with-krb5-dir=/usr shared 
+
+
+
+#orig	--prefix=%{_prefix} --openssldir=%{_sysconfdir}/pki/tls ${sslflags} \
+#	zlib enable-camellia enable-seed enable-tlsext enable-rfc3779 \
+#	enable-cms enable-md2 no-mdc2 no-rc5 no-ec2m no-gost no-srp \
+#	--with-krb5-flavor=MIT --enginesdir=%{_libdir}/openssl/engines \
+#	--with-krb5-dir=/usr shared  ${sslarch} %{?!nofips:fips}
+
+
+# Add -Wa,--noexecstack here so that libcrypto's assembler modules will be
+# marked as not requiring an executable stack.
+# Also add -DPURIFY to make using valgrind with openssl easier as we do not
+# want to depend on the uninitialized memory as a source of entropy anyway.
+RPM_OPT_FLAGS="$RPM_OPT_FLAGS -Wa,--noexecstack -DPURIFY"
+make depend
+make all
+
+# Generate hashes for the included certs.
+make rehash
+
+
+%check
+# Verify that what was compiled actually works.
+
+
+LD_LIBRARY_PATH=`pwd`${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
+export LD_LIBRARY_PATH
+
+	
+# Add generation of HMAC checksum of the final stripped library
+#%define __spec_install_post \
+#    %{?__debug_package:%{__debug_install_post}} \
+#    %{__arch_install_post} \
+#    %{__os_install_post} \
+#    crypto/fips/fips_standalone_hmac $RPM_BUILD_ROOT%{_libdir}/libcrypto.so.%{version} >$RPM_BUILD_ROOT%{_libdir}/.libcrypto.so.%{version}.hmac \
+#    ln -sf .libcrypto.so.%{version}.hmac $RPM_BUILD_ROOT%{_libdir}/.libcrypto.so.%{soversion}.hmac \
+#    crypto/fips/fips_standalone_hmac $RPM_BUILD_ROOT%{_libdir}/libssl.so.%{version} >$RPM_BUILD_ROOT%{_libdir}/.libssl.so.%{version}.hmac \
+#    ln -sf .libssl.so.%{version}.hmac $RPM_BUILD_ROOT%{_libdir}/.libssl.so.%{soversion}.hmac \
+#%{nil}
+
+%define __provides_exclude_from %{_libdir}/openssl
+
+%install
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
+# Install OpenSSL.
+install -d $RPM_BUILD_ROOT{%{_bindir},%{_includedir},%{_libdir},%{_mandir},%{_libdir}/openssl}
+make INSTALL_PREFIX=$RPM_BUILD_ROOT install
+make INSTALL_PREFIX=$RPM_BUILD_ROOT install_docs
+#mv $RPM_BUILD_ROOT%{_libdir}/engines $RPM_BUILD_ROOT%{_libdir}/openssl
+#mv $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/man/* $RPM_BUILD_ROOT%{_mandir}/
+#rmdir $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/man
+
+#echo rename so.%{soversion} so.%{version} $RPM_BUILD_ROOT%{_libdir}/*.so.%{soversion}
+#rename so.%{soversion} so.%{version} $RPM_BUILD_ROOT%{_libdir}/*.so.%{soversion}
+#mkdir $RPM_BUILD_ROOT/%{_lib}
+#for lib in $RPM_BUILD_ROOT%{_libdir}/*.so.%{version} ; do
+#	chmod 755 ${lib}
+#	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`
+#	ln -s -f `basename ${lib}` $RPM_BUILD_ROOT%{_libdir}/`basename ${lib} .%{version}`.%{soversion}
+#done
+
+# Install a makefile for generating keys and self-signed certs, and a script
+# for generating them on the fly.
+mkdir -p $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/certs
+
+# Make sure we actually include the headers we built against.
+for header in $RPM_BUILD_ROOT%{_includedir}/openssl/* ; do
+	if [ -f ${header} -a -f include/openssl/$(basename ${header}) ] ; then
+		install -m644 include/openssl/`basename ${header}` ${header}
+	fi
+done
+
+# Rename man pages so that they don't conflict with other system man pages.
+#pushd $RPM_BUILD_ROOT%{_mandir}
+#ln -s -f config.5 man5/openssl.cnf.5
+#for manpage in man*/* ; do
+#	if [ -L ${manpage} ]; then
+#		TARGET=`ls -l ${manpage} | awk '{ print $NF }'`
+#		ln -snf ${TARGET}ssl ${manpage}ssl
+#		rm -f ${manpage}
+#	else
+#		mv ${manpage} ${manpage}ssl
+#	fi
+#done
+#for conflict in passwd rand ; do
+#	rename ${conflict} ssl${conflict} man*/${conflict}*
+#done
+#popd
+
+# Pick a CA script.
+pushd  $RPM_BUILD_ROOT%{_sysconfdir}/pki/tls/misc
+mv CA.sh CA
+popd
+
+mkdir -m755 $RPM_BUILD_ROOT%{_sysconfdir}/pki/CA
+mkdir -m700 $RPM_BUILD_ROOT%{_sysconfdir}/pki/CA/private
+mkdir -m755 $RPM_BUILD_ROOT%{_sysconfdir}/pki/CA/certs
+mkdir -m755 $RPM_BUILD_ROOT%{_sysconfdir}/pki/CA/crl
+mkdir -m755 $RPM_BUILD_ROOT%{_sysconfdir}/pki/CA/newcerts
+
+# Ensure the openssl.cnf timestamp is identical across builds to avoid
+# mulitlib conflicts and unnecessary renames on upgrade
+
+# Determine which arch opensslconf.h is going to try to #include.
+basearch=%{_arch}
+%ifarch %{ix86}
+basearch=i386
+%endif
+%ifarch sparcv9
+basearch=sparc
+%endif
+%ifarch sparc64
+basearch=sparc64
+%endif
+
+%ifarch %{multilib_arches}
+# Do an opensslconf.h switcheroo to avoid file conflicts on systems where you
+# can have both a 32- and 64-bit version of the library, and they each need
+# their own correct-but-different versions of opensslconf.h to be usable.
+
+cat $RPM_BUILD_ROOT/%{_prefix}/include/openssl/opensslconf.h >> \
+	$RPM_BUILD_ROOT/%{_prefix}/include/openssl/opensslconf-${basearch}.h
+
+%endif
+
+# Remove unused files from upstream fips support
+rm -rf $RPM_BUILD_ROOT/%{_bindir}/openssl_fips_fingerprint
+rm -rf $RPM_BUILD_ROOT/%{_libdir}/fips_premain.*
+rm -rf $RPM_BUILD_ROOT/%{_libdir}/fipscanister.*
+
+%clean
+[ "$RPM_BUILD_ROOT" != "/" ] && rm -rf $RPM_BUILD_ROOT
+
+%files
+%defattr(-,root,root)
+%doc FAQ LICENSE CHANGES NEWS INSTALL README
+%doc doc/c-indentation.el doc/openssl.txt
+%doc doc/openssl_button.html doc/openssl_button.gif
+%doc doc/ssleay.txt
+/usr
+/etc
+
+
+%post -p /sbin/ldconfig
+
+%postun -p /sbin/ldconfig
+
+%changelog
+
+* Tue Oct 26 1999 Bernhard Rosenkrdnzer <bero@redhat.de>
+- inital packaging
+- changes from base:
+  - Move /usr/local/ssl to /usr/share/ssl for FHS compliance
+  - handle RPM_OPT_FLAGS

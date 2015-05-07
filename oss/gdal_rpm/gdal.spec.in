@@ -1,0 +1,330 @@
+#TODO: g2clib and grib (said to be modified)
+#TODO: Python 3 modules should be possible since 1.7
+#TODO: Create script to make clean tarball
+#TODO: msg needs to have PublicDecompWT.zip from EUMETSAT, which is not free;
+#      Building without msg therefore
+#TODO: e00compr bundled?
+#TODO: There are tests for bindings -- at least for Perl
+#TODO: Java has a directory with test data and a build target called test
+#      It uses %{JAVA_RUN}; make test seems to work in the build directory
+#TODO: e00compr source is the same in the package and bundled in GDAL
+#TODO: Consider doxy patch from Suse, setting EXTRACT_LOCAL_CLASSES  = NO
+
+# Soname should be bumped on API/ABI break
+# http://trac.osgeo.org/gdal/ticket/4543
+
+# Conditionals and structures for EL 5 are there
+# to make life easier for downstream ELGIS.
+# Sadly noarch doesn't work in EL 5, see
+# http://fedoraproject.org/wiki/EPEL/GuidelinesAndPolicies
+
+#TODO: EvenR suggested to drop Ruby bindings, as they are unmaintained
+# He also suggest to use --with-static-proj4 to actually link to proj, instead of dlopen()ing it.
+
+
+%global spatialite "--with-spatialite"
+
+
+Name:      gdal
+Version: __VERSION__
+Release: __RELEASE__%{?dist}
+Summary:   GIS file format library
+Group:     System Environment/Libraries
+License:   MIT
+URL:       http://www.gdal.org
+Source0:   http://download.osgeo.org/%{name}/%{name}-%{version}.tar.gz
+
+
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+#_prefix: /usr
+BuildRequires: ant
+# No armadillo in EL5
+##BuildRequires: armadillo-devel
+##BuildRequires: cfitsio-devel
+# No CharLS in EL5
+##BuildRequires: CharLS-devel
+##BuildRequires: chrpath
+BuildRequires: curl-devel
+BuildRequires: doxygen
+##BuildRequires: expat-devel
+BuildRequires: fontconfig-devel
+# No freexl in EL5
+##BuildRequires: freexl-devel
+#BuildRequires: g2clib-static
+BuildRequires: geos-devel
+BuildRequires: ghostscript
+##BuildRequires: hdf-devel
+##BuildRequires: hdf-static
+##BuildRequires: hdf5-devel
+##BuildRequires: java-devel >= 1:1.6.0
+##BuildRequires: jasper-devel
+##BuildRequires: jpackage-utils
+BuildRequires: libgcj
+BuildRequires: libgeotiff-devel
+# No libgta in EL5
+##BuildRequires: libgta-devel
+
+BuildRequires: libjpeg-devel
+BuildRequires: libpng-devel
+
+##BuildRequires: libspatialite-devel
+
+BuildRequires: libtiff-devel
+#BuildRequires: libwebp-devel
+BuildRequires: libtool
+BuildRequires: giflib-devel
+##BuildRequires: netcdf-devel
+BuildRequires: libdap-devel
+##BuildRequires: librx-devel
+BuildRequires: mysql-devel
+BuildRequires: numpy
+#BuildRequires: ogdi-devel
+BuildRequires: perl(ExtUtils::MakeMaker)
+BuildRequires: pkgconfig
+BuildRequires: poppler-devel
+BuildRequires: postgresql-devel
+##BuildRequires: proj-devel
+##BuildRequires: python-devel
+#BuildRequires: ruby
+#BuildRequires: ruby-devel
+BuildRequires: sqlite-devel
+BuildRequires: swig
+BuildRequires: tetex-latex
+##BuildRequires: unixODBC-devel
+##BuildRequires: xerces-c-devel
+##BuildRequires: xz-devel
+BuildRequires: zlib-devel
+
+# Run time dependency for gpsbabel driver
+#Requires: gpsbabel
+
+
+# Enable/disable generating refmans
+%global build_refman 0
+
+# We have multilib triage
+
+  %global cpuarch 64
+
+%description
+Geospatial Data Abstraction Library (GDAL/OGR) is a cross platform
+C++ translator library for raster and vector geospatial data formats.
+As a library, it presents a single abstract data model to the calling
+application for all supported formats. It also comes with a variety of
+useful commandline utilities for data translation and processing.
+
+It provides the primary data access engine for many applications.
+GDAL/OGR is the most widely used geospatial data access library.
+
+
+%package devel
+Summary: Development files for the GDAL file format library
+Group: Development/Libraries
+
+
+%description devel
+This package contains development files for GDAL.
+
+
+%package libs
+Summary: GDAL file format library
+Group: System Environment/Libraries
+
+%description libs
+This package contains the GDAL file format library.
+
+
+
+
+
+%prep
+%setup -q -n %{name}-%{version}
+
+
+
+
+%build
+#TODO: Couldn't I have modified that in the prep section?
+
+export CFLAGS="$RPM_OPT_FLAGS -fpic"
+
+#export CXXFLAGS="$CFLAGS -I%{_includedir}/libgeotiff"
+#export CPPFLAGS="$CPPFLAGS -I%{_includedir}/libgeotiff"
+
+# For future reference:
+# epsilon: Stalled review -- https://bugzilla.redhat.com/show_bug.cgi?id=660024
+# openjpeg 2.0 necessary, 1.4 is in Fedora
+# Building without pgeo driver, because it drags in Java
+   #     --with-geotiff=external   
+ #       --with-libtiff=external   
+#        --with-hdf4               
+
+
+%configure --prefix=/usr
+
+#%configure \
+#        --with-autoload=%{_libdir}/%{name}plugins \
+#        --datadir=%{_datadir}/%{name}/ \
+#        --includedir=%{_includedir}/%{name}/ \
+#        --prefix=%{_prefix} \
+#        --without-bsb \
+#        --with-armadillo          \
+#        --with-curl               \
+#        --with-cfitsio=%{_prefix} \
+#        --with-dods-root=%{_prefix} \
+#        --with-expat              \
+#        --with-freexl             \
+#        --with-geos               \
+#        --with-gif                \
+#        --with-gta                \
+#        --with-hdf5               \
+#        --with-jasper             \
+#        --without-java               \
+#        --with-jpeg               \
+#        --without-jpeg12          \
+#        --with-liblzma            \
+#        --with-libz               \
+#        --without-mdb             \
+#        --without-mysql              \
+#        --with-netcdf             \
+#        --with-odbc               \
+#        --without-ogdi               \
+#        --without-msg             \
+#        --without-openjpeg        \
+#	--without-ruby 	\
+#        --with-pcraster           \
+#        --with-pg                 \
+#        --with-png                \
+#        --with-poppler            \
+#        %{spatialite}             \
+#        --with-sqlite3            \
+#        --with-threads            \
+#        --with-xerces             \
+#        --enable-shared           
+#
+#        #--with-rasdaman           # 8.3 rasdaman has no -lcompression; doesn't work
+
+
+
+
+%install
+rm -rf %{buildroot}
+
+make    DESTDIR=%{buildroot} \
+        install 
+	
+
+# Directory for auto-loading plugins
+mkdir -p %{buildroot}%{_libdir}/%{name}plugins
+
+
+
+
+#TODO: Header date lost during installation
+# Install multilib cpl_config.h bz#430894
+install -p -D -m 644 port/cpl_config.h %{buildroot}%{_includedir}/%{name}/cpl_config-%{cpuarch}.h
+# Create universal multilib cpl_config.h bz#341231
+# The problem is still there in 1.9.
+#TODO: Ticket?
+
+#>>>>>>>>>>>>>
+cat > %{buildroot}%{_includedir}/%{name}/cpl_config.h <<EOF
+#include <bits/wordsize.h>
+
+#if __WORDSIZE == 32
+#include "gdal/cpl_config-32.h"
+#else
+#if __WORDSIZE == 64
+#include "gdal/cpl_config-64.h"
+#else
+#error "Unknown word size"
+#endif
+#endif
+EOF
+#<<<<<<<<<<<<<
+touch -r NEWS port/cpl_config.h
+
+# Create and install pkgconfig file
+#TODO: Why does that exist? Does Grass really use it? I don't think so.
+# http://trac.osgeo.org/gdal/ticket/3470
+#>>>>>>>>>>>>>
+cat > %{name}.pc <<EOF
+prefix=/opt/gdal
+exec_prefix=/usr
+libdir=%{_libdir}
+includedir=%{_includedir}
+
+Name: GDAL
+Description: GIS file format library
+Version: %{version}
+Libs: -L\${libdir} -lgdal
+Cflags: -I\${includedir}/%{name}
+EOF
+#<<<<<<<<<<<<<
+mkdir -p %{buildroot}%{_libdir}/pkgconfig/
+install -m 644 %{name}.pc %{buildroot}%{_libdir}/pkgconfig/
+touch -r NEWS %{buildroot}%{_libdir}/pkgconfig/%{name}.pc
+
+# Multilib gdal-config
+# Rename the original script to gdal-config-$arch (stores arch-specific information)
+# and create a script to call one or the other -- depending on detected architecture
+# TODO: The extra script will direct you to 64 bit libs on
+# 64 bit systems -- whether you like that or not
+mv %{buildroot}%{_bindir}/%{name}-config %{buildroot}%{_bindir}/%{name}-config-%{cpuarch}
+#>>>>>>>>>>>>>
+cat > %{buildroot}%{_bindir}/%{name}-config <<EOF
+#!/bin/bash
+
+ARCH=\$(uname -m)
+case \$ARCH in
+x86_64 | ppc64 | ia64 | s390x | sparc64 | alpha | alphaev6 )
+%{name}-config-64 \${*}
+;;
+*)
+%{name}-config-32 \${*}
+;;
+esac
+EOF
+#<<<<<<<<<<<<<
+touch -r NEWS %{buildroot}%{_bindir}/%{name}-config
+chmod 755 %{buildroot}%{_bindir}/%{name}-config
+
+
+
+# Don't duplicate license files
+rm -f %{buildroot}%{_datadir}/%{name}/LICENSE.TXT
+
+
+%check
+#for i in -I/usr/lib/jvm/java/include{,/linux}; do
+#    java_inc="$java_inc $i"
+#done
+
+
+
+
+%clean
+rm -rf %{buildroot}
+
+%post libs -p /sbin/ldconfig
+
+%postun libs -p /sbin/ldconfig
+
+
+%files
+/usr
+
+
+
+
+
+
+%changelog
+
+* Fri Feb 09 2007 Balint Cristian <cbalint@redhat.com> 1.4.0-1
+- first pack for fedora extras
+- disable geotiff (untill license sorted out)
+- enable all options aviable from extras
+- pack perl and python modules
+- kill r-path from libs
+- pack all docs posible
