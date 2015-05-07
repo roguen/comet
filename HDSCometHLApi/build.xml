@@ -1,0 +1,57 @@
+<project name="HelloWorld" basedir="." default="main">
+
+    <property name="src.dir"     value="src"/>
+
+    <property name="build.dir"   value="bin"/>
+    <property name="classes.dir" value="${build.dir}"/>
+    <property name="jar.dir"     value="${build.dir}/jar"/>
+
+   <property name="lib.dir"     value="/opt/COMETDist/libs"/>
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar"/>
+
+    </path>
+
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${classes.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" classpathref="classpath" debug="true"/>
+    </target>
+
+    <target name="jar" depends="compile">
+        <mkdir dir="${jar.dir}"/>
+        <jar destfile="${jar.dir}/${ant.project.name}.jar" basedir="${classes.dir}">
+        </jar>
+    </target>
+
+    <target name="run" depends="jar">
+     <java fork="true" classname="${main-class}">
+            <classpath>
+                <path refid="classpath"/>
+                <path location="${jar.dir}/${ant.project.name}.jar"/>
+            </classpath>
+        </java>
+    </target>
+
+    <target name="clean-build" depends="clean,jar"/>
+
+    <target name="create_jar">
+        <jar destfile="./HDSCometHLApi.jar">
+           <manifest>
+<!--                <attribute name="Class-Path" value="."/> -->
+<!--                <attribute name="Rsrc-Class-Path" value="./ sqlite-jdbc-3.7.2.jar HCPHelpersForJava.jar httpclient-4.2.5.jar httpcore-4.2.4.jar commons-codec-1.6.jar commons-logging-1.1.1.jar im4java-1.4.0.jar jid3lib-0.5.4.jar jackson-all-1.6.1.jar"/> -->
+			<attribute name="Extension-Name" value="com.hdsfed.cometapi" />
+			
+            </manifest>
+            <fileset dir="${build.dir}"/>
+
+     
+        </jar>
+    </target> 
+
+</project>
