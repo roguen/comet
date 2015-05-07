@@ -1,0 +1,85 @@
+Toolkit Installer Wrapper
+
+By Chris Delezenski <chris.delezenski@hdsfed.com>
+
+(c) 2014 Hitachi Data Systems Federal Corporation
+
+Purpose:
+
+Wrap the installation process with a reusable makefile/script system.
+
+Typical use case includes a preinstall script, a number of vanilla upstream RPM packages, a number of toolkit-specific packages and a postinstall script.
+
+Any custom scripts and packages will be embedded as a tar ball.
+
+The generated (via sed) install script will kick off the installation process.
+
+Usage:
+
+step 1: populate the files in custom/
+
+AUTHOR: author and email address of the package
+PACKAGE: name of the toolkit rebranding (must be one word)
+COPYRIGHT: copyright notice to appear in the installation script
+UPSTREAM: One or more word descibing the installation source (e.g. 'Insert CentOS DVD')
+TESTING: touch this file to create an installer that only displays "yum" and "rpm" but will not actually install files.
+TARGETDIR: local directory where the resulting toolkit should land
+packages.txt: space delimited list of vanilla RPMs to pull from installed repositories
+
+
+Use the Makefile to build the toolkit.
+
+From ground zero:
+
+sudo make extraclean getpackages install
+
+"extraclean" will remove the packages directory and also call "clean"
+
+"clean" will remove payload, temp* directories and call bin/clean.sh (customize as needed script)
+
+"stamp" will increment the build version and update ver/STAMP with the current date
+
+"sed" will create a temp directory and call bin/sed.sh (customize as needed, normally will sed through all scripts in the "in" directory; these scripts will have __AUTHOR__, __PACKAGE__ et al replaced with values, strip off the ".in" extension and copy the script into temp/
+
+getpackages will create packages directory.  It will also pull down elgis and epel release rpms and then call bin/getpackages.sh (customize as needed) to pull in packages from various sources.  Packages in this context means installable RPMs.
+It is only necessary to call this once, until extraclean is called
+
+payload will call sed and then create payload.tgz by compressing payload directory (already populated elsewhere)
+
+install will call payload first and then copy the binary to a target directory
+
+
+Work flow:
+
+Start clean: make extraclean
+
+
+Customize! Populate all files in custom/*
+AUTHOR,  COPYRIGHT, PACKAGE, TARGETDIR, UPSTREAM are all 1 or 2 word files.
+delete or touch TESTING; if TESTING is present, the installer will not install any rpms
+
+mainstream_packages.txt should contain a space delimited listing of rpms to install from the primary DVD.
+If there are no mainstream RPMs to install, delete this file
+
+yum_packages.txt should contain a space delimited listing of rpms to pull and install from external repositories (such as RPMforge)
+These packages will be pulled during "getpackages", populating payload/packages/
+if there are no external RPMs to pull via yum, delete this file
+
+Optional:  Populate clean.sh, in/preinstall.sh.in, in/postinstall.sh.in as appropriate.  If these files will not be used, they made be deleted.
+Preinstall will execute before the installer.  Postinstall will execute after all RPMs are installed and could be used for first time interactive configuration.
+
+
+Create payload: make getpackages
+
+
+build rpms (which should land elsewhere and be copied into payload/packages/ (payload is a temporary directory!)
+
+Finally build the toolkit
+
+
+eg.  sudo make install
+
+The installation binary will appear in the TARGETDIR defined by custom/TARGETDIR
+
+
+ 

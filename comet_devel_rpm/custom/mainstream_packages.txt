@@ -1,0 +1,4 @@
+libgfortran  postgresql-libs unixODBC ImageMagick
+eject liboil pciutils unzip patch
+xz bzip2 
+giflib apr ntp bind-utils nfs-utils openssl

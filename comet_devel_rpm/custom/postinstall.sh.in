@@ -1,0 +1,112 @@
+#!/bin/sh
+# __COPYRIGHT__
+# All Rights Reserved.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
+#
+# Package: __DESCRIPTION__
+# Author: __AUTHOR__
+# Compilation Date: __DATE__
+# License: __LICENSE__
+# Version: __VERSION__
+# (RPM) Release: __RELEASE__
+# SVN: r__SVN__
+
+
+echo -e "\n================ Running COMET cleanup script =================\n"
+
+INSTALLDIR=/opt/COMETDist
+
+#. /opt/COMETDist/include/hcp_shell_api.sh
+
+# only exectued once
+if [ "$COMET_ALREADY_INSTALLED" = "1" ]; then
+	echo "Comet already installed, nothing to do"
+	exit 0
+fi
+
+pushd ${INSTALLDIR}
+
+export USERNAME="comet"
+
+useradd ${USERNAME}
+usermod -G wheel ${USERNAME}
+#mkdir -p /home/${USERNAME}/Desktop
+#/bin/chown ${USERNAME}:${GROUP} /home/${USERNAME}/Desktop
+#/bin/chown -R  ${USERNAME}:${GROUP} ${INSTALLDIR}/*
+#/bin/chown ${USERNAME}:${GROUP} ${INSTALLDIR}
+#/bin/chmod ugo+rw ${INSTALLDIR}
+#
+#(cd /home/${USERNAME}/ && rm -rf .gconf)
+#(cd /home/${USERNAME} && gunzip < /opt/COMETDist/dot-gconf.tgz | tar -xvpf -)
+#(cd /home/${USERNAME} && mv dot-gconf .gconf)
+
+#add /etc/ssh and ~/.ssh later
+
+#(cd /home/${USERNAME}/Desktop && /bin/ln -s ${INSTALLDIR}/bin/comet.sh)
+#(cd /home/${USERNAME}/Desktop && /bin/ln -s ${INSTALLDIR}/InputDir)
+#(cd /home/${USERNAME}/Desktop && /bin/ln -s ${INSTALLDIR}/comet.html)
+#(cd /home/${USERNAME}/Desktop && /bin/ln -s ${INSTALLDIR}/comet.properties)
+#(cd /home/${USERNAME}/Desktop && /bin/ln -s ${INSTALLDIR}/bin/whatsmyip.sh)
+#(cd /home/${USERNAME}/Desktop && /bin/ln -s ${INSTALLDIR}/bin/restart_network.sh)
+
+
+	
+chkconfig --add comet
+chkconfig --levels 345 comet on
+chkconfig --add tomcat
+chkconfig --levels 345 tomcat on
+#chkconfig --add dnsmasq
+#chkconfig --levels 345 dnsmasq on
+chkconfig --levels 345 iptables off
+chkconfig --levels 345 ntpd on
+chkconfig --levels 345 redis on
+
+
+#chkconfig --levels 345 nfs on
+
+
+service iptables stop
+
+# disable selinux
+setenforce 0
+mkdir -p ${INSTALLDIR}/in
+cp -avpf /etc/selinux/config ${INSTALLDIR}/in/selinux_config.in
+/bin/sed 's/SELINUX=enforcing/SELINUX=disabled/g' < ${INSTALLDIR}/in/selinux_config.in > /etc/selinux/config
+
+
+#make sure apache is on port 80
+cp -avpf ${INSTALLDIR}/apache-tomcat/conf/server.xml ${INSTALLDIR}/in/server.xml.in
+/bin/sed 's/Connector port="8080/Connector port="80/g;' < ${INSTALLDIR}/in/server.xml.in > ${INSTALLDIR}/apache-tomcat/conf/server.xml 
+
+#if [ -e /etc/gdm/custom.conf ]; then
+#/bin/sed 's/__USER__/comet/g' < ${INSTALLDIR}/in/custom.conf.in > /etc/gdm/custom.conf
+#fi
+
+
+# sudoers
+/bin/sed 's/# %wheel	ALL=(ALL)	NOPASSWD: ALL/%wheel	ALL=(ALL)	NOPASSWD: ALL/g' < /etc/sudoers > sudoers.temp
+mv sudoers.temp /etc/sudoers
+chmod 440 /etc/sudoers
+popd
+
+
+
+
+echo -e "\nInstallation clean up complete\n"
+
+
+echo "Configure COMET at any time by running \"comet_config.sh\""
+comet_config.sh
+
+	

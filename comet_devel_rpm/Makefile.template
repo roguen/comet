@@ -1,0 +1,73 @@
+# __COPYRIGHT__
+# All Rights Reserved.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
+#
+# Package: __DESCRIPTION__
+# Author: __AUTHOR__
+# Compilation Date: __DATE__
+# License: __LICENSE__
+# Version: __VERSION__
+# (RPM) Release: __RELEASE__
+# SVN: r__SVN__
+
+PWD=$(shell pwd)
+VER=$(shell cat TOMCAT_VERSION)
+NAME=apache-tomcat
+PNAME=$(NAME)-$(VER)
+SED=$(shell cometdev_getvar.sh sed)
+RPMTOP=$(shell cometdev_getvar.sh rpmtop)
+
+clean: 
+	rm -rf $(OBJS) $(NAME) $(PNAME) *rpm $(NAME).spec
+
+diffs: clean
+	svn diff >diffs.txt
+	nedit diffs.txt&
+
+wget:
+	wget http://apache.cs.utah.edu/tomcat/tomcat-7/v$(VER)/bin/$(NAME)-$(VER).tar.gz
+
+install: 
+
+	PWD=$(shell pwd)
+	mkdir -p $(DESTDIR)/opt/COMETDist
+	(cd $(DESTDIR)/opt/COMETDist && gunzip < $(PWD)/$(PNAME).tar.gz | tar -xvpf -)
+	(cd $(DESTDIR)/opt/COMETDist && ln -s $(PNAME) $(NAME))
+	
+
+
+
+spec:
+	sed '$(SED)' < $(NAME).spec.in > $(NAME).spec
+	sed '$(SED)' < Makefile > Makefile.test
+
+rpms: clean spec
+	mkdir -p $(PNAME)
+	
+	cp $(PNAME).tar.gz $(PNAME)/
+	
+	sed '$(SED)' < Makefile > $(PNAME)/Makefile
+	sed '$(SED)' < $(NAME).spec.in > $(NAME).spec
+	touch $(PNAME)/configure
+	chmod 755 $(PNAME)/configure
+	
+	cometdev_install_common.sh $(PNAME)/
+
+	tar -cvp $(PNAME) -f - | gzip > /workspace/RPM/SOURCES/$(PNAME).tar.gz
+	rpmbuild -ba ./$(NAME).spec --target noarch
+	mv -vf $(RPMTOP)/RPMS/noarch/$(NAME)-* .
+	mv -vf $(RPMTOP)/SRPMS/$(NAME)-* .
+
+	
+

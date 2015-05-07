@@ -1,0 +1,18 @@
+xerces-c.x86_64
+cfitsio.x86_64
+geos.x86_64
+libgeotiff.x86_64
+librx.x86_64
+netcdf.x86_64
+ogdi.x86_64
+proj.x86_64
+proj-epsg.x86_64
+libspatialite.x86_64
+libass.x86_64 enca.x86_64
+fribidi.x86_64
+celt.x86_64
+openal-soft.x86_64
+librtmp.x86_64
+CharLS.x86_64
+tomcat-native.x86_64
+redis.x86_64

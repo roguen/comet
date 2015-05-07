@@ -1,0 +1,60 @@
+#!/bin/sh
+# __COPYRIGHT__
+# All Rights Reserved.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
+#
+# Package: __DESCRIPTION__
+# Author: __AUTHOR__
+# Compilation Date: __DATE__
+# License: __LICENSE__
+# Version: __VERSION__
+# (RPM) Release: __RELEASE__
+# SVN: r__SVN__
+#
+# Decompression stub
+#
+# this is the top of the toolkit installer which decompresses the tar ball and scripts
+
+
+echo ""
+echo "Self Extracting Installer"
+echo ""
+
+export TMPDIR=`mktemp -d /tmp/selfextract.XXXXXX`
+
+ARCHIVE=`awk '/^__ARCHIVE_BELOW__/ {print NR + 1; exit 0; }' $0`
+
+#tail -n+$ARCHIVE $0 | tar Jxv -C $TMPDIR
+tail -n+$ARCHIVE $0 | tar zxv -C $TMPDIR
+
+CDIR=`pwd`
+cd $TMPDIR
+
+if [ "$#" -eq 0 ]; then
+	if ./installer.sh $TMPDIR; then
+		cd $CDIR
+		rm -rf $TMPDIR
+		exit 0
+	fi
+fi
+
+echo "archive extracted to $TMPDIR"
+
+cd $CDIR
+
+if ! [ -z $1 ]; then
+mv -vf $TMPDIR $1
+fi
+exit 1
+__ARCHIVE_BELOW__
